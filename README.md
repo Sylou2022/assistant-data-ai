@@ -1,3 +1,16 @@
+---
+title: Assistant Data
+emoji: 📊
+colorFrom: blue
+colorTo: indigo
+sdk: gradio
+sdk_version: "5.0.0"
+app_file: app/main.py
+pinned: false
+---
+
+
+
 # Assistant Data AI
 
 Assistant conversationnel permettant d'interroger une base SQL Server

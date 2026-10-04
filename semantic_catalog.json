@@ -1,0 +1,1866 @@
+{
+  "generated_at": "2026-09-30T20:15:21.022387+00:00",
+  "tables": [
+    {
+      "schema": "dbo",
+      "name": "AI_Allowed_Tables",
+      "columns": [
+        {
+          "name": "Table_ID",
+          "data_type": "int",
+          "nullable": false,
+          "position": 1,
+          "is_primary_key": true
+        },
+        {
+          "name": "Table_Name",
+          "data_type": "nvarchar",
+          "nullable": false,
+          "position": 2,
+          "is_primary_key": false
+        },
+        {
+          "name": "Table_Type",
+          "data_type": "nvarchar",
+          "nullable": true,
+          "position": 3,
+          "is_primary_key": false
+        },
+        {
+          "name": "Usage_Description",
+          "data_type": "nvarchar",
+          "nullable": true,
+          "position": 4,
+          "is_primary_key": false
+        },
+        {
+          "name": "Is_Enabled",
+          "data_type": "bit",
+          "nullable": true,
+          "position": 5,
+          "is_primary_key": false
+        }
+      ]
+    },
+    {
+      "schema": "dbo",
+      "name": "AI_SQL_Examples",
+      "columns": [
+        {
+          "name": "Example_ID",
+          "data_type": "int",
+          "nullable": false,
+          "position": 1,
+          "is_primary_key": true
+        },
+        {
+          "name": "Question",
+          "data_type": "nvarchar",
+          "nullable": false,
+          "position": 2,
+          "is_primary_key": false
+        },
+        {
+          "name": "Intent",
+          "data_type": "nvarchar",
+          "nullable": true,
+          "position": 3,
+          "is_primary_key": false
+        },
+        {
+          "name": "SQL_Query",
+          "data_type": "nvarchar",
+          "nullable": false,
+          "position": 4,
+          "is_primary_key": false
+        },
+        {
+          "name": "Explanation",
+          "data_type": "nvarchar",
+          "nullable": true,
+          "position": 5,
+          "is_primary_key": false
+        },
+        {
+          "name": "Is_Active",
+          "data_type": "bit",
+          "nullable": true,
+          "position": 6,
+          "is_primary_key": false
+        }
+      ]
+    },
+    {
+      "schema": "dbo",
+      "name": "AI_SQL_Rules",
+      "columns": [
+        {
+          "name": "Rule_ID",
+          "data_type": "int",
+          "nullable": false,
+          "position": 1,
+          "is_primary_key": true
+        },
+        {
+          "name": "Rule_Name",
+          "data_type": "nvarchar",
+          "nullable": false,
+          "position": 2,
+          "is_primary_key": false
+        },
+        {
+          "name": "Rule_Type",
+          "data_type": "nvarchar",
+          "nullable": false,
+          "position": 3,
+          "is_primary_key": false
+        },
+        {
+          "name": "Rule_Value",
+          "data_type": "nvarchar",
+          "nullable": true,
+          "position": 4,
+          "is_primary_key": false
+        },
+        {
+          "name": "Description",
+          "data_type": "nvarchar",
+          "nullable": true,
+          "position": 5,
+          "is_primary_key": false
+        },
+        {
+          "name": "Is_Active",
+          "data_type": "bit",
+          "nullable": true,
+          "position": 6,
+          "is_primary_key": false
+        }
+      ]
+    },
+    {
+      "schema": "dbo",
+      "name": "Business_KPI",
+      "columns": [
+        {
+          "name": "KPI_ID",
+          "data_type": "int",
+          "nullable": false,
+          "position": 1,
+          "is_primary_key": true
+        },
+        {
+          "name": "Nom_KPI",
+          "data_type": "nvarchar",
+          "nullable": true,
+          "position": 2,
+          "is_primary_key": false
+        },
+        {
+          "name": "Description",
+          "data_type": "nvarchar",
+          "nullable": true,
+          "position": 3,
+          "is_primary_key": false
+        },
+        {
+          "name": "Formule_SQL",
+          "data_type": "nvarchar",
+          "nullable": true,
+          "position": 4,
+          "is_primary_key": false
+        },
+        {
+          "name": "Unite",
+          "data_type": "nvarchar",
+          "nullable": true,
+          "position": 5,
+          "is_primary_key": false
+        },
+        {
+          "name": "Frequence",
+          "data_type": "nvarchar",
+          "nullable": true,
+          "position": 6,
+          "is_primary_key": false
+        }
+      ]
+    },
+    {
+      "schema": "dbo",
+      "name": "Data_Catalog",
+      "columns": [
+        {
+          "name": "Catalog_ID",
+          "data_type": "int",
+          "nullable": false,
+          "position": 1,
+          "is_primary_key": true
+        },
+        {
+          "name": "Schema_Name",
+          "data_type": "nvarchar",
+          "nullable": false,
+          "position": 2,
+          "is_primary_key": false
+        },
+        {
+          "name": "Table_Name",
+          "data_type": "nvarchar",
+          "nullable": false,
+          "position": 3,
+          "is_primary_key": false
+        },
+        {
+          "name": "Column_Name",
+          "data_type": "nvarchar",
+          "nullable": false,
+          "position": 4,
+          "is_primary_key": false
+        },
+        {
+          "name": "Data_Type",
+          "data_type": "nvarchar",
+          "nullable": true,
+          "position": 5,
+          "is_primary_key": false
+        },
+        {
+          "name": "Is_Nullable",
+          "data_type": "bit",
+          "nullable": true,
+          "position": 6,
+          "is_primary_key": false
+        },
+        {
+          "name": "Is_Primary_Key",
+          "data_type": "bit",
+          "nullable": true,
+          "position": 7,
+          "is_primary_key": false
+        },
+        {
+          "name": "Is_Foreign_Key",
+          "data_type": "bit",
+          "nullable": true,
+          "position": 8,
+          "is_primary_key": false
+        },
+        {
+          "name": "Description_Technique",
+          "data_type": "nvarchar",
+          "nullable": true,
+          "position": 9,
+          "is_primary_key": false
+        },
+        {
+          "name": "Date_Creation",
+          "data_type": "datetime",
+          "nullable": true,
+          "position": 10,
+          "is_primary_key": false
+        },
+        {
+          "name": "Is_Measure",
+          "data_type": "bit",
+          "nullable": true,
+          "position": 11,
+          "is_primary_key": false
+        },
+        {
+          "name": "Is_Dimension",
+          "data_type": "bit",
+          "nullable": true,
+          "position": 12,
+          "is_primary_key": false
+        },
+        {
+          "name": "Is_Business_Key",
+          "data_type": "bit",
+          "nullable": true,
+          "position": 13,
+          "is_primary_key": false
+        },
+        {
+          "name": "Is_AI_Exposed",
+          "data_type": "bit",
+          "nullable": true,
+          "position": 14,
+          "is_primary_key": false
+        },
+        {
+          "name": "Domain_Name",
+          "data_type": "nvarchar",
+          "nullable": true,
+          "position": 15,
+          "is_primary_key": false
+        },
+        {
+          "name": "Description_Metier",
+          "data_type": "nvarchar",
+          "nullable": true,
+          "position": 16,
+          "is_primary_key": false
+        }
+      ]
+    },
+    {
+      "schema": "dbo",
+      "name": "Data_Dictionnaire_Metier",
+      "columns": [
+        {
+          "name": "Dictionnaire_ID",
+          "data_type": "int",
+          "nullable": false,
+          "position": 1,
+          "is_primary_key": true
+        },
+        {
+          "name": "Table_Name",
+          "data_type": "nvarchar",
+          "nullable": false,
+          "position": 2,
+          "is_primary_key": false
+        },
+        {
+          "name": "Column_Name",
+          "data_type": "nvarchar",
+          "nullable": false,
+          "position": 3,
+          "is_primary_key": false
+        },
+        {
+          "name": "Nom_Metier",
+          "data_type": "nvarchar",
+          "nullable": true,
+          "position": 4,
+          "is_primary_key": false
+        },
+        {
+          "name": "Description_Metier",
+          "data_type": "nvarchar",
+          "nullable": true,
+          "position": 5,
+          "is_primary_key": false
+        },
+        {
+          "name": "Type_Metier",
+          "data_type": "nvarchar",
+          "nullable": true,
+          "position": 6,
+          "is_primary_key": false
+        },
+        {
+          "name": "Unite",
+          "data_type": "nvarchar",
+          "nullable": true,
+          "position": 7,
+          "is_primary_key": false
+        },
+        {
+          "name": "Regle_Metier",
+          "data_type": "nvarchar",
+          "nullable": true,
+          "position": 8,
+          "is_primary_key": false
+        },
+        {
+          "name": "Exemple",
+          "data_type": "nvarchar",
+          "nullable": true,
+          "position": 9,
+          "is_primary_key": false
+        },
+        {
+          "name": "Sensible",
+          "data_type": "bit",
+          "nullable": true,
+          "position": 10,
+          "is_primary_key": false
+        },
+        {
+          "name": "Utilisable_IA",
+          "data_type": "bit",
+          "nullable": true,
+          "position": 11,
+          "is_primary_key": false
+        },
+        {
+          "name": "Date_Creation",
+          "data_type": "datetime",
+          "nullable": true,
+          "position": 12,
+          "is_primary_key": false
+        }
+      ]
+    },
+    {
+      "schema": "dbo",
+      "name": "Dim_Client",
+      "columns": [
+        {
+          "name": "Client_ID",
+          "data_type": "int",
+          "nullable": false,
+          "position": 1,
+          "is_primary_key": true
+        },
+        {
+          "name": "Nom_Client",
+          "data_type": "nvarchar",
+          "nullable": true,
+          "position": 2,
+          "is_primary_key": false
+        },
+        {
+          "name": "Segment",
+          "data_type": "nvarchar",
+          "nullable": true,
+          "position": 3,
+          "is_primary_key": false
+        },
+        {
+          "name": "Date_Inscription",
+          "data_type": "date",
+          "nullable": true,
+          "position": 4,
+          "is_primary_key": false
+        },
+        {
+          "name": "Statut",
+          "data_type": "nvarchar",
+          "nullable": true,
+          "position": 5,
+          "is_primary_key": false
+        }
+      ]
+    },
+    {
+      "schema": "dbo",
+      "name": "Dim_Date",
+      "columns": [
+        {
+          "name": "Date_ID",
+          "data_type": "int",
+          "nullable": false,
+          "position": 1,
+          "is_primary_key": true
+        },
+        {
+          "name": "Date",
+          "data_type": "date",
+          "nullable": false,
+          "position": 2,
+          "is_primary_key": false
+        },
+        {
+          "name": "Annee",
+          "data_type": "int",
+          "nullable": true,
+          "position": 3,
+          "is_primary_key": false
+        },
+        {
+          "name": "Trimestre",
+          "data_type": "int",
+          "nullable": true,
+          "position": 4,
+          "is_primary_key": false
+        },
+        {
+          "name": "Mois",
+          "data_type": "int",
+          "nullable": true,
+          "position": 5,
+          "is_primary_key": false
+        },
+        {
+          "name": "Nom_Mois",
+          "data_type": "nvarchar",
+          "nullable": true,
+          "position": 6,
+          "is_primary_key": false
+        },
+        {
+          "name": "Semaine",
+          "data_type": "int",
+          "nullable": true,
+          "position": 7,
+          "is_primary_key": false
+        }
+      ]
+    },
+    {
+      "schema": "dbo",
+      "name": "Dim_Produit",
+      "columns": [
+        {
+          "name": "Produit_ID",
+          "data_type": "int",
+          "nullable": false,
+          "position": 1,
+          "is_primary_key": true
+        },
+        {
+          "name": "Nom_Produit",
+          "data_type": "nvarchar",
+          "nullable": true,
+          "position": 2,
+          "is_primary_key": false
+        },
+        {
+          "name": "Categorie",
+          "data_type": "nvarchar",
+          "nullable": true,
+          "position": 3,
+          "is_primary_key": false
+        },
+        {
+          "name": "Sous_Categorie",
+          "data_type": "nvarchar",
+          "nullable": true,
+          "position": 4,
+          "is_primary_key": false
+        },
+        {
+          "name": "Prix_Unitaire",
+          "data_type": "decimal",
+          "nullable": true,
+          "position": 5,
+          "is_primary_key": false
+        }
+      ]
+    },
+    {
+      "schema": "dbo",
+      "name": "Dim_Region",
+      "columns": [
+        {
+          "name": "Region_ID",
+          "data_type": "int",
+          "nullable": false,
+          "position": 1,
+          "is_primary_key": true
+        },
+        {
+          "name": "Region",
+          "data_type": "nvarchar",
+          "nullable": true,
+          "position": 2,
+          "is_primary_key": false
+        },
+        {
+          "name": "Pays",
+          "data_type": "nvarchar",
+          "nullable": true,
+          "position": 3,
+          "is_primary_key": false
+        }
+      ]
+    },
+    {
+      "schema": "dbo",
+      "name": "Documentation_Metier",
+      "columns": [
+        {
+          "name": "Document_ID",
+          "data_type": "int",
+          "nullable": false,
+          "position": 1,
+          "is_primary_key": true
+        },
+        {
+          "name": "Titre",
+          "data_type": "nvarchar",
+          "nullable": true,
+          "position": 2,
+          "is_primary_key": false
+        },
+        {
+          "name": "Categorie",
+          "data_type": "nvarchar",
+          "nullable": true,
+          "position": 3,
+          "is_primary_key": false
+        },
+        {
+          "name": "Contenu",
+          "data_type": "nvarchar",
+          "nullable": true,
+          "position": 4,
+          "is_primary_key": false
+        },
+        {
+          "name": "Date_Mise_A_Jour",
+          "data_type": "date",
+          "nullable": true,
+          "position": 5,
+          "is_primary_key": false
+        }
+      ]
+    },
+    {
+      "schema": "dbo",
+      "name": "DQ_Anomalies_Test",
+      "columns": [
+        {
+          "name": "Anomalie_ID",
+          "data_type": "int",
+          "nullable": false,
+          "position": 1,
+          "is_primary_key": true
+        },
+        {
+          "name": "Vente_ID",
+          "data_type": "int",
+          "nullable": false,
+          "position": 2,
+          "is_primary_key": false
+        },
+        {
+          "name": "Type_Anomalie",
+          "data_type": "nvarchar",
+          "nullable": false,
+          "position": 3,
+          "is_primary_key": false
+        },
+        {
+          "name": "Description",
+          "data_type": "nvarchar",
+          "nullable": true,
+          "position": 4,
+          "is_primary_key": false
+        },
+        {
+          "name": "Date_Injection",
+          "data_type": "datetime",
+          "nullable": true,
+          "position": 5,
+          "is_primary_key": false
+        }
+      ]
+    },
+    {
+      "schema": "dbo",
+      "name": "DQ_Corrections",
+      "columns": [
+        {
+          "name": "Correction_ID",
+          "data_type": "int",
+          "nullable": false,
+          "position": 1,
+          "is_primary_key": true
+        },
+        {
+          "name": "Vente_ID",
+          "data_type": "int",
+          "nullable": false,
+          "position": 2,
+          "is_primary_key": false
+        },
+        {
+          "name": "Type_Anomalie",
+          "data_type": "nvarchar",
+          "nullable": true,
+          "position": 3,
+          "is_primary_key": false
+        },
+        {
+          "name": "Ancienne_Valeur",
+          "data_type": "nvarchar",
+          "nullable": true,
+          "position": 4,
+          "is_primary_key": false
+        },
+        {
+          "name": "Nouvelle_Valeur",
+          "data_type": "nvarchar",
+          "nullable": true,
+          "position": 5,
+          "is_primary_key": false
+        },
+        {
+          "name": "Date_Correction",
+          "data_type": "datetime",
+          "nullable": true,
+          "position": 6,
+          "is_primary_key": false
+        },
+        {
+          "name": "Methode_Correction",
+          "data_type": "nvarchar",
+          "nullable": true,
+          "position": 7,
+          "is_primary_key": false
+        }
+      ]
+    },
+    {
+      "schema": "dbo",
+      "name": "DQ_Resultats",
+      "columns": [
+        {
+          "name": "DQ_ID",
+          "data_type": "int",
+          "nullable": false,
+          "position": 1,
+          "is_primary_key": true
+        },
+        {
+          "name": "Date_Controle",
+          "data_type": "datetime",
+          "nullable": true,
+          "position": 2,
+          "is_primary_key": false
+        },
+        {
+          "name": "Nom_Controle",
+          "data_type": "nvarchar",
+          "nullable": true,
+          "position": 3,
+          "is_primary_key": false
+        },
+        {
+          "name": "Dimension_Qualite",
+          "data_type": "nvarchar",
+          "nullable": true,
+          "position": 4,
+          "is_primary_key": false
+        },
+        {
+          "name": "Nombre_Anomalies",
+          "data_type": "int",
+          "nullable": true,
+          "position": 5,
+          "is_primary_key": false
+        },
+        {
+          "name": "Statut",
+          "data_type": "nvarchar",
+          "nullable": true,
+          "position": 6,
+          "is_primary_key": false
+        },
+        {
+          "name": "Description",
+          "data_type": "nvarchar",
+          "nullable": true,
+          "position": 7,
+          "is_primary_key": false
+        }
+      ]
+    },
+    {
+      "schema": "dbo",
+      "name": "DQ_Score",
+      "columns": [
+        {
+          "name": "Score_ID",
+          "data_type": "int",
+          "nullable": false,
+          "position": 1,
+          "is_primary_key": true
+        },
+        {
+          "name": "Date_Calcul",
+          "data_type": "datetime",
+          "nullable": true,
+          "position": 2,
+          "is_primary_key": false
+        },
+        {
+          "name": "Score_Completude",
+          "data_type": "decimal",
+          "nullable": true,
+          "position": 3,
+          "is_primary_key": false
+        },
+        {
+          "name": "Score_Validite",
+          "data_type": "decimal",
+          "nullable": true,
+          "position": 4,
+          "is_primary_key": false
+        },
+        {
+          "name": "Score_Coherence",
+          "data_type": "decimal",
+          "nullable": true,
+          "position": 5,
+          "is_primary_key": false
+        },
+        {
+          "name": "Score_Global",
+          "data_type": "decimal",
+          "nullable": true,
+          "position": 6,
+          "is_primary_key": false
+        },
+        {
+          "name": "Niveau_Qualite",
+          "data_type": "nvarchar",
+          "nullable": true,
+          "position": 7,
+          "is_primary_key": false
+        }
+      ]
+    },
+    {
+      "schema": "dbo",
+      "name": "Fact_Ventes",
+      "columns": [
+        {
+          "name": "Vente_ID",
+          "data_type": "int",
+          "nullable": false,
+          "position": 1,
+          "is_primary_key": true
+        },
+        {
+          "name": "Date_ID",
+          "data_type": "int",
+          "nullable": false,
+          "position": 2,
+          "is_primary_key": false
+        },
+        {
+          "name": "Client_ID",
+          "data_type": "int",
+          "nullable": false,
+          "position": 3,
+          "is_primary_key": false
+        },
+        {
+          "name": "Produit_ID",
+          "data_type": "int",
+          "nullable": false,
+          "position": 4,
+          "is_primary_key": false
+        },
+        {
+          "name": "Region_ID",
+          "data_type": "int",
+          "nullable": false,
+          "position": 5,
+          "is_primary_key": false
+        },
+        {
+          "name": "Quantite",
+          "data_type": "int",
+          "nullable": true,
+          "position": 6,
+          "is_primary_key": false
+        },
+        {
+          "name": "Chiffre_Affaires",
+          "data_type": "decimal",
+          "nullable": true,
+          "position": 7,
+          "is_primary_key": false
+        },
+        {
+          "name": "Cout",
+          "data_type": "decimal",
+          "nullable": true,
+          "position": 8,
+          "is_primary_key": false
+        },
+        {
+          "name": "Marge",
+          "data_type": "decimal",
+          "nullable": true,
+          "position": 9,
+          "is_primary_key": false
+        }
+      ]
+    },
+    {
+      "schema": "dbo",
+      "name": "Semantic_Entities",
+      "columns": [
+        {
+          "name": "Entity_ID",
+          "data_type": "int",
+          "nullable": false,
+          "position": 1,
+          "is_primary_key": true
+        },
+        {
+          "name": "Entity_Name",
+          "data_type": "nvarchar",
+          "nullable": false,
+          "position": 2,
+          "is_primary_key": false
+        },
+        {
+          "name": "Entity_Type",
+          "data_type": "nvarchar",
+          "nullable": false,
+          "position": 3,
+          "is_primary_key": false
+        },
+        {
+          "name": "Physical_Table",
+          "data_type": "nvarchar",
+          "nullable": true,
+          "position": 4,
+          "is_primary_key": false
+        },
+        {
+          "name": "Physical_Column",
+          "data_type": "nvarchar",
+          "nullable": true,
+          "position": 5,
+          "is_primary_key": false
+        },
+        {
+          "name": "Description",
+          "data_type": "nvarchar",
+          "nullable": true,
+          "position": 6,
+          "is_primary_key": false
+        },
+        {
+          "name": "Is_AI_Enabled",
+          "data_type": "bit",
+          "nullable": true,
+          "position": 7,
+          "is_primary_key": false
+        },
+        {
+          "name": "Created_At",
+          "data_type": "datetime",
+          "nullable": true,
+          "position": 8,
+          "is_primary_key": false
+        }
+      ]
+    },
+    {
+      "schema": "dbo",
+      "name": "Semantic_Relationships",
+      "columns": [
+        {
+          "name": "Relationship_ID",
+          "data_type": "int",
+          "nullable": false,
+          "position": 1,
+          "is_primary_key": true
+        },
+        {
+          "name": "Source_Table",
+          "data_type": "nvarchar",
+          "nullable": false,
+          "position": 2,
+          "is_primary_key": false
+        },
+        {
+          "name": "Source_Column",
+          "data_type": "nvarchar",
+          "nullable": false,
+          "position": 3,
+          "is_primary_key": false
+        },
+        {
+          "name": "Target_Table",
+          "data_type": "nvarchar",
+          "nullable": false,
+          "position": 4,
+          "is_primary_key": false
+        },
+        {
+          "name": "Target_Column",
+          "data_type": "nvarchar",
+          "nullable": false,
+          "position": 5,
+          "is_primary_key": false
+        },
+        {
+          "name": "Relationship_Type",
+          "data_type": "nvarchar",
+          "nullable": false,
+          "position": 6,
+          "is_primary_key": false
+        },
+        {
+          "name": "Description",
+          "data_type": "nvarchar",
+          "nullable": true,
+          "position": 7,
+          "is_primary_key": false
+        },
+        {
+          "name": "Is_AI_Enabled",
+          "data_type": "bit",
+          "nullable": true,
+          "position": 8,
+          "is_primary_key": false
+        },
+        {
+          "name": "Created_At",
+          "data_type": "datetime",
+          "nullable": true,
+          "position": 9,
+          "is_primary_key": false
+        }
+      ]
+    },
+    {
+      "schema": "dbo",
+      "name": "Semantic_Synonyms",
+      "columns": [
+        {
+          "name": "Synonym_ID",
+          "data_type": "int",
+          "nullable": false,
+          "position": 1,
+          "is_primary_key": true
+        },
+        {
+          "name": "Entity_ID",
+          "data_type": "int",
+          "nullable": false,
+          "position": 2,
+          "is_primary_key": false
+        },
+        {
+          "name": "Synonym",
+          "data_type": "nvarchar",
+          "nullable": false,
+          "position": 3,
+          "is_primary_key": false
+        }
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "source_schema": "dbo",
+      "source_table": "Fact_Ventes",
+      "source_column": "Client_ID",
+      "target_schema": "dbo",
+      "target_table": "Dim_Client",
+      "target_column": "Client_ID"
+    },
+    {
+      "source_schema": "dbo",
+      "source_table": "Fact_Ventes",
+      "source_column": "Date_ID",
+      "target_schema": "dbo",
+      "target_table": "Dim_Date",
+      "target_column": "Date_ID"
+    },
+    {
+      "source_schema": "dbo",
+      "source_table": "Fact_Ventes",
+      "source_column": "Produit_ID",
+      "target_schema": "dbo",
+      "target_table": "Dim_Produit",
+      "target_column": "Produit_ID"
+    },
+    {
+      "source_schema": "dbo",
+      "source_table": "Fact_Ventes",
+      "source_column": "Region_ID",
+      "target_schema": "dbo",
+      "target_table": "Dim_Region",
+      "target_column": "Region_ID"
+    },
+    {
+      "source_schema": "dbo",
+      "source_table": "Semantic_Synonyms",
+      "source_column": "Entity_ID",
+      "target_schema": "dbo",
+      "target_table": "Semantic_Entities",
+      "target_column": "Entity_ID"
+    }
+  ],
+  "ai_metadata": {
+    "allowed_tables": [
+      {
+        "Table_ID": 6,
+        "Table_Name": "Business_KPI",
+        "Table_Type": "METADATA",
+        "Usage_Description": "Référentiel officiel des KPI métier.",
+        "Is_Enabled": true
+      },
+      {
+        "Table_ID": 10,
+        "Table_Name": "dbo.Dim_Client",
+        "Table_Type": "DIMENSION",
+        "Usage_Description": "Dimension contenant les informations clients.",
+        "Is_Enabled": true
+      },
+      {
+        "Table_ID": 11,
+        "Table_Name": "dbo.Dim_Date",
+        "Table_Type": "DIMENSION",
+        "Usage_Description": "Dimension calendrier utilisée pour les analyses temporelles.",
+        "Is_Enabled": true
+      },
+      {
+        "Table_ID": 12,
+        "Table_Name": "dbo.Dim_Produit",
+        "Table_Type": "DIMENSION",
+        "Usage_Description": "Dimension contenant les produits et catégories.",
+        "Is_Enabled": true
+      },
+      {
+        "Table_ID": 13,
+        "Table_Name": "dbo.Dim_Region",
+        "Table_Type": "DIMENSION",
+        "Usage_Description": "Dimension contenant les régions et pays.",
+        "Is_Enabled": true
+      },
+      {
+        "Table_ID": 9,
+        "Table_Name": "dbo.Fact_Ventes",
+        "Table_Type": "FACT",
+        "Usage_Description": "Table centrale contenant les ventes et les mesures commerciales.",
+        "Is_Enabled": true
+      },
+      {
+        "Table_ID": 2,
+        "Table_Name": "Dim_Client",
+        "Table_Type": "DIMENSION",
+        "Usage_Description": "Informations descriptives sur les clients.",
+        "Is_Enabled": true
+      },
+      {
+        "Table_ID": 5,
+        "Table_Name": "Dim_Date",
+        "Table_Type": "DIMENSION",
+        "Usage_Description": "Dimension temporelle.",
+        "Is_Enabled": true
+      },
+      {
+        "Table_ID": 3,
+        "Table_Name": "Dim_Produit",
+        "Table_Type": "DIMENSION",
+        "Usage_Description": "Informations descriptives sur les produits.",
+        "Is_Enabled": true
+      },
+      {
+        "Table_ID": 4,
+        "Table_Name": "Dim_Region",
+        "Table_Type": "DIMENSION",
+        "Usage_Description": "Informations géographiques.",
+        "Is_Enabled": true
+      },
+      {
+        "Table_ID": 7,
+        "Table_Name": "Documentation_Metier",
+        "Table_Type": "METADATA",
+        "Usage_Description": "Documentation et définitions métier.",
+        "Is_Enabled": true
+      },
+      {
+        "Table_ID": 8,
+        "Table_Name": "DQ_Score",
+        "Table_Type": "DATA_QUALITY",
+        "Usage_Description": "Score de qualité des données.",
+        "Is_Enabled": true
+      },
+      {
+        "Table_ID": 1,
+        "Table_Name": "Fact_Ventes",
+        "Table_Type": "FACT",
+        "Usage_Description": "Table principale contenant les transactions commerciales.",
+        "Is_Enabled": true
+      }
+    ],
+    "business_dictionary": [
+      {
+        "Dictionnaire_ID": 7,
+        "Table_Name": "Business_KPI",
+        "Column_Name": "Chiffre_Affaires",
+        "Nom_Metier": "CA total",
+        "Description_Metier": "Chiffre d'affaires total généré sur la période analysée.",
+        "Type_Metier": "KPI",
+        "Unite": "EUR",
+        "Regle_Metier": "SUM(Fact_Ventes.Chiffre_Affaires)",
+        "Exemple": null,
+        "Sensible": false,
+        "Utilisable_IA": true
+      },
+      {
+        "Dictionnaire_ID": 35,
+        "Table_Name": "dbo.Dim_Client",
+        "Column_Name": "Segment",
+        "Nom_Metier": "Segment client",
+        "Description_Metier": "Catégorie commerciale attribuée au client.",
+        "Type_Metier": "DIMENSION",
+        "Unite": null,
+        "Regle_Metier": "Utiliser cette colonne pour segmenter les clients.",
+        "Exemple": "Premium",
+        "Sensible": false,
+        "Utilisable_IA": true
+      },
+      {
+        "Dictionnaire_ID": 32,
+        "Table_Name": "dbo.Fact_Ventes",
+        "Column_Name": "Chiffre_Affaires",
+        "Nom_Metier": "Chiffre d'affaires",
+        "Description_Metier": "Montant généré par une vente.",
+        "Type_Metier": "MESURE",
+        "Unite": "EUR",
+        "Regle_Metier": "Sommer la colonne pour obtenir le chiffre d'affaires.",
+        "Exemple": "1250.50",
+        "Sensible": false,
+        "Utilisable_IA": true
+      },
+      {
+        "Dictionnaire_ID": 34,
+        "Table_Name": "dbo.Fact_Ventes",
+        "Column_Name": "Marge",
+        "Nom_Metier": "Marge commerciale",
+        "Description_Metier": "Différence entre le chiffre d'affaires et le coût.",
+        "Type_Metier": "MESURE",
+        "Unite": "EUR",
+        "Regle_Metier": "Sommer la colonne pour obtenir la marge totale.",
+        "Exemple": "350.00",
+        "Sensible": false,
+        "Utilisable_IA": true
+      },
+      {
+        "Dictionnaire_ID": 33,
+        "Table_Name": "dbo.Fact_Ventes",
+        "Column_Name": "Quantite",
+        "Nom_Metier": "Quantité vendue",
+        "Description_Metier": "Nombre d'unités vendues.",
+        "Type_Metier": "MESURE",
+        "Unite": "UNITÉ",
+        "Regle_Metier": "Sommer la colonne pour obtenir le volume vendu.",
+        "Exemple": "10",
+        "Sensible": false,
+        "Utilisable_IA": true
+      },
+      {
+        "Dictionnaire_ID": 1,
+        "Table_Name": "Dim_Client",
+        "Column_Name": "Client_ID",
+        "Nom_Metier": "Identifiant client",
+        "Description_Metier": "Identifiant unique permettant d'identifier un client.",
+        "Type_Metier": "Identifiant",
+        "Unite": null,
+        "Regle_Metier": "Un Client_ID identifie un seul client.",
+        "Exemple": null,
+        "Sensible": false,
+        "Utilisable_IA": true
+      },
+      {
+        "Dictionnaire_ID": 27,
+        "Table_Name": "Dim_Date",
+        "Column_Name": "Annee",
+        "Nom_Metier": "Année",
+        "Description_Metier": "Année calendaire.",
+        "Type_Metier": "Dimension temporelle",
+        "Unite": null,
+        "Regle_Metier": null,
+        "Exemple": "2025",
+        "Sensible": false,
+        "Utilisable_IA": true
+      },
+      {
+        "Dictionnaire_ID": 26,
+        "Table_Name": "Dim_Date",
+        "Column_Name": "Date",
+        "Nom_Metier": "Date",
+        "Description_Metier": "Date calendaire associée à la vente.",
+        "Type_Metier": "Date",
+        "Unite": null,
+        "Regle_Metier": null,
+        "Exemple": "2025-01-15",
+        "Sensible": false,
+        "Utilisable_IA": true
+      },
+      {
+        "Dictionnaire_ID": 25,
+        "Table_Name": "Dim_Date",
+        "Column_Name": "Date_ID",
+        "Nom_Metier": "Identifiant date",
+        "Description_Metier": "Identifiant unique de la date dans le calendrier.",
+        "Type_Metier": "Identifiant",
+        "Unite": null,
+        "Regle_Metier": "Clé de liaison avec Fact_Ventes.Date_ID.",
+        "Exemple": "20250115",
+        "Sensible": false,
+        "Utilisable_IA": true
+      },
+      {
+        "Dictionnaire_ID": 29,
+        "Table_Name": "Dim_Date",
+        "Column_Name": "Mois",
+        "Nom_Metier": "Mois",
+        "Description_Metier": "Numéro du mois calendaire.",
+        "Type_Metier": "Dimension temporelle",
+        "Unite": null,
+        "Regle_Metier": "Valeurs attendues : 1 à 12.",
+        "Exemple": "3",
+        "Sensible": false,
+        "Utilisable_IA": true
+      },
+      {
+        "Dictionnaire_ID": 30,
+        "Table_Name": "Dim_Date",
+        "Column_Name": "Nom_Mois",
+        "Nom_Metier": "Nom du mois",
+        "Description_Metier": "Nom du mois calendaire.",
+        "Type_Metier": "Dimension temporelle",
+        "Unite": null,
+        "Regle_Metier": null,
+        "Exemple": "Mars",
+        "Sensible": false,
+        "Utilisable_IA": true
+      },
+      {
+        "Dictionnaire_ID": 31,
+        "Table_Name": "Dim_Date",
+        "Column_Name": "Semaine",
+        "Nom_Metier": "Semaine",
+        "Description_Metier": "Numéro de semaine calendaire.",
+        "Type_Metier": "Dimension temporelle",
+        "Unite": null,
+        "Regle_Metier": null,
+        "Exemple": "12",
+        "Sensible": false,
+        "Utilisable_IA": true
+      },
+      {
+        "Dictionnaire_ID": 28,
+        "Table_Name": "Dim_Date",
+        "Column_Name": "Trimestre",
+        "Nom_Metier": "Trimestre",
+        "Description_Metier": "Numéro du trimestre calendaire.",
+        "Type_Metier": "Dimension temporelle",
+        "Unite": null,
+        "Regle_Metier": "Valeurs attendues : 1 à 4.",
+        "Exemple": "1",
+        "Sensible": false,
+        "Utilisable_IA": true
+      },
+      {
+        "Dictionnaire_ID": 19,
+        "Table_Name": "Dim_Produit",
+        "Column_Name": "Categorie",
+        "Nom_Metier": "Catégorie produit",
+        "Description_Metier": "Catégorie commerciale principale du produit.",
+        "Type_Metier": "Dimension",
+        "Unite": null,
+        "Regle_Metier": null,
+        "Exemple": "Électronique",
+        "Sensible": false,
+        "Utilisable_IA": true
+      },
+      {
+        "Dictionnaire_ID": 18,
+        "Table_Name": "Dim_Produit",
+        "Column_Name": "Nom_Produit",
+        "Nom_Metier": "Nom du produit",
+        "Description_Metier": "Nom commercial du produit.",
+        "Type_Metier": "Attribut",
+        "Unite": null,
+        "Regle_Metier": null,
+        "Exemple": "Produit A",
+        "Sensible": false,
+        "Utilisable_IA": true
+      },
+      {
+        "Dictionnaire_ID": 21,
+        "Table_Name": "Dim_Produit",
+        "Column_Name": "Prix_Unitaire",
+        "Nom_Metier": "Prix unitaire",
+        "Description_Metier": "Prix de vente unitaire du produit.",
+        "Type_Metier": "Mesure financière",
+        "Unite": "EUR",
+        "Regle_Metier": "Prix associé à une unité du produit.",
+        "Exemple": "250.00",
+        "Sensible": false,
+        "Utilisable_IA": true
+      },
+      {
+        "Dictionnaire_ID": 17,
+        "Table_Name": "Dim_Produit",
+        "Column_Name": "Produit_ID",
+        "Nom_Metier": "Identifiant produit",
+        "Description_Metier": "Identifiant unique du produit.",
+        "Type_Metier": "Identifiant",
+        "Unite": null,
+        "Regle_Metier": "Clé permettant de relier les produits aux ventes.",
+        "Exemple": "42",
+        "Sensible": false,
+        "Utilisable_IA": true
+      },
+      {
+        "Dictionnaire_ID": 20,
+        "Table_Name": "Dim_Produit",
+        "Column_Name": "Sous_Categorie",
+        "Nom_Metier": "Sous-catégorie produit",
+        "Description_Metier": "Sous-catégorie commerciale du produit.",
+        "Type_Metier": "Dimension",
+        "Unite": null,
+        "Regle_Metier": null,
+        "Exemple": "Accessoires",
+        "Sensible": false,
+        "Utilisable_IA": true
+      },
+      {
+        "Dictionnaire_ID": 24,
+        "Table_Name": "Dim_Region",
+        "Column_Name": "Pays",
+        "Nom_Metier": "Pays",
+        "Description_Metier": "Pays associé à la région.",
+        "Type_Metier": "Dimension géographique",
+        "Unite": null,
+        "Regle_Metier": null,
+        "Exemple": "France",
+        "Sensible": false,
+        "Utilisable_IA": true
+      },
+      {
+        "Dictionnaire_ID": 23,
+        "Table_Name": "Dim_Region",
+        "Column_Name": "Region",
+        "Nom_Metier": "Région",
+        "Description_Metier": "Nom de la région commerciale.",
+        "Type_Metier": "Dimension géographique",
+        "Unite": null,
+        "Regle_Metier": null,
+        "Exemple": "Île-de-France",
+        "Sensible": false,
+        "Utilisable_IA": true
+      },
+      {
+        "Dictionnaire_ID": 22,
+        "Table_Name": "Dim_Region",
+        "Column_Name": "Region_ID",
+        "Nom_Metier": "Identifiant région",
+        "Description_Metier": "Identifiant unique de la région.",
+        "Type_Metier": "Identifiant",
+        "Unite": null,
+        "Regle_Metier": "Clé permettant de relier les régions aux ventes.",
+        "Exemple": "7",
+        "Sensible": false,
+        "Utilisable_IA": true
+      },
+      {
+        "Dictionnaire_ID": 14,
+        "Table_Name": "Fact_Ventes",
+        "Column_Name": "Chiffre_Affaires",
+        "Nom_Metier": "Chiffre d'affaires",
+        "Description_Metier": "Montant généré par la vente.",
+        "Type_Metier": "Mesure financière",
+        "Unite": "EUR",
+        "Regle_Metier": "Le CA correspond au montant de la vente.",
+        "Exemple": "1250.50",
+        "Sensible": false,
+        "Utilisable_IA": true
+      },
+      {
+        "Dictionnaire_ID": 4,
+        "Table_Name": "Fact_Ventes",
+        "Column_Name": "Chiffre_Affaires",
+        "Nom_Metier": "Chiffre d'affaires",
+        "Description_Metier": "Montant généré par la vente.",
+        "Type_Metier": "KPI financier",
+        "Unite": "EUR",
+        "Regle_Metier": "CA = Prix_Unitaire × Quantite.",
+        "Exemple": null,
+        "Sensible": false,
+        "Utilisable_IA": true
+      },
+      {
+        "Dictionnaire_ID": 10,
+        "Table_Name": "Fact_Ventes",
+        "Column_Name": "Client_ID",
+        "Nom_Metier": "Client",
+        "Description_Metier": "Référence du client ayant réalisé la vente.",
+        "Type_Metier": "Dimension",
+        "Unite": null,
+        "Regle_Metier": "Fact_Ventes.Client_ID = Dim_Client.Client_ID",
+        "Exemple": "125",
+        "Sensible": false,
+        "Utilisable_IA": true
+      },
+      {
+        "Dictionnaire_ID": 15,
+        "Table_Name": "Fact_Ventes",
+        "Column_Name": "Cout",
+        "Nom_Metier": "Coût",
+        "Description_Metier": "Coût associé à la vente.",
+        "Type_Metier": "Mesure financière",
+        "Unite": "EUR",
+        "Regle_Metier": "Le coût est une valeur monétaire positive ou nulle.",
+        "Exemple": "800.00",
+        "Sensible": false,
+        "Utilisable_IA": true
+      },
+      {
+        "Dictionnaire_ID": 5,
+        "Table_Name": "Fact_Ventes",
+        "Column_Name": "Cout",
+        "Nom_Metier": "Coût",
+        "Description_Metier": "Coût associé à la vente.",
+        "Type_Metier": "KPI financier",
+        "Unite": "EUR",
+        "Regle_Metier": "Le coût doit être supérieur ou égal à zéro.",
+        "Exemple": null,
+        "Sensible": false,
+        "Utilisable_IA": true
+      },
+      {
+        "Dictionnaire_ID": 9,
+        "Table_Name": "Fact_Ventes",
+        "Column_Name": "Date_ID",
+        "Nom_Metier": "Date de vente",
+        "Description_Metier": "Référence vers la dimension calendrier permettant d'analyser les ventes dans le temps.",
+        "Type_Metier": "Dimension temporelle",
+        "Unite": null,
+        "Regle_Metier": "Fact_Ventes.Date_ID = Dim_Date.Date_ID",
+        "Exemple": "20250115",
+        "Sensible": false,
+        "Utilisable_IA": true
+      },
+      {
+        "Dictionnaire_ID": 6,
+        "Table_Name": "Fact_Ventes",
+        "Column_Name": "Marge",
+        "Nom_Metier": "Marge commerciale",
+        "Description_Metier": "Différence entre le chiffre d'affaires et le coût.",
+        "Type_Metier": "KPI financier",
+        "Unite": "EUR",
+        "Regle_Metier": "Marge = Chiffre_Affaires - Cout.",
+        "Exemple": null,
+        "Sensible": false,
+        "Utilisable_IA": true
+      },
+      {
+        "Dictionnaire_ID": 16,
+        "Table_Name": "Fact_Ventes",
+        "Column_Name": "Marge",
+        "Nom_Metier": "Marge",
+        "Description_Metier": "Différence entre le chiffre d'affaires et le coût.",
+        "Type_Metier": "Mesure financière",
+        "Unite": "EUR",
+        "Regle_Metier": "Marge = Chiffre_Affaires - Cout.",
+        "Exemple": "450.50",
+        "Sensible": false,
+        "Utilisable_IA": true
+      },
+      {
+        "Dictionnaire_ID": 11,
+        "Table_Name": "Fact_Ventes",
+        "Column_Name": "Produit_ID",
+        "Nom_Metier": "Produit",
+        "Description_Metier": "Référence du produit vendu.",
+        "Type_Metier": "Dimension",
+        "Unite": null,
+        "Regle_Metier": "Fact_Ventes.Produit_ID = Dim_Produit.Produit_ID",
+        "Exemple": "42",
+        "Sensible": false,
+        "Utilisable_IA": true
+      },
+      {
+        "Dictionnaire_ID": 13,
+        "Table_Name": "Fact_Ventes",
+        "Column_Name": "Quantite",
+        "Nom_Metier": "Quantité vendue",
+        "Description_Metier": "Nombre d'unités vendues lors de la transaction.",
+        "Type_Metier": "Mesure",
+        "Unite": "Unité",
+        "Regle_Metier": "La quantité doit être strictement supérieure à zéro.",
+        "Exemple": "5",
+        "Sensible": false,
+        "Utilisable_IA": true
+      },
+      {
+        "Dictionnaire_ID": 3,
+        "Table_Name": "Fact_Ventes",
+        "Column_Name": "Quantite",
+        "Nom_Metier": "Quantité vendue",
+        "Description_Metier": "Nombre d'unités vendues lors de la transaction.",
+        "Type_Metier": "Mesure",
+        "Unite": "Unité",
+        "Regle_Metier": "La quantité doit être strictement supérieure à zéro.",
+        "Exemple": null,
+        "Sensible": false,
+        "Utilisable_IA": true
+      },
+      {
+        "Dictionnaire_ID": 12,
+        "Table_Name": "Fact_Ventes",
+        "Column_Name": "Region_ID",
+        "Nom_Metier": "Région",
+        "Description_Metier": "Référence géographique associée à la vente.",
+        "Type_Metier": "Dimension",
+        "Unite": null,
+        "Regle_Metier": "Fact_Ventes.Region_ID = Dim_Region.Region_ID",
+        "Exemple": "7",
+        "Sensible": false,
+        "Utilisable_IA": true
+      },
+      {
+        "Dictionnaire_ID": 8,
+        "Table_Name": "Fact_Ventes",
+        "Column_Name": "Vente_ID",
+        "Nom_Metier": "Identifiant de vente",
+        "Description_Metier": "Identifiant unique d'une transaction commerciale.",
+        "Type_Metier": "Identifiant",
+        "Unite": null,
+        "Regle_Metier": "Chaque vente possède un identifiant unique.",
+        "Exemple": "100245",
+        "Sensible": false,
+        "Utilisable_IA": true
+      },
+      {
+        "Dictionnaire_ID": 2,
+        "Table_Name": "Fact_Ventes",
+        "Column_Name": "Vente_ID",
+        "Nom_Metier": "Identifiant de vente",
+        "Description_Metier": "Identifiant unique d'une transaction de vente.",
+        "Type_Metier": "Identifiant",
+        "Unite": null,
+        "Regle_Metier": "Une vente possède un identifiant unique.",
+        "Exemple": null,
+        "Sensible": false,
+        "Utilisable_IA": true
+      }
+    ],
+    "kpis": [
+      {
+        "KPI_ID": 1,
+        "Nom_KPI": "Chiffre d'affaires",
+        "Description": "Montant total généré par les ventes",
+        "Formule_SQL": "SUM(Fact_Ventes.Chiffre_Affaires)",
+        "Unite": "EUR",
+        "Frequence": "Mensuelle"
+      },
+      {
+        "KPI_ID": 4,
+        "Nom_KPI": "Chiffre d'affaires",
+        "Description": "Montant total des ventes.",
+        "Formule_SQL": "SUM(dbo.Fact_Ventes.Chiffre_Affaires)",
+        "Unite": "EUR",
+        "Frequence": "JOURNALIÈRE"
+      },
+      {
+        "KPI_ID": 2,
+        "Nom_KPI": "Marge",
+        "Description": "Chiffre d'affaires moins les coûts",
+        "Formule_SQL": "SUM(Fact_Ventes.Marge)",
+        "Unite": "EUR",
+        "Frequence": "Mensuelle"
+      },
+      {
+        "KPI_ID": 3,
+        "Nom_KPI": "Marge %",
+        "Description": "Marge rapportée au chiffre d'affaires",
+        "Formule_SQL": "SUM(Fact_Ventes.Marge) / NULLIF(SUM(Fact_Ventes.Chiffre_Affaires),0)",
+        "Unite": "%",
+        "Frequence": "Mensuelle"
+      },
+      {
+        "KPI_ID": 6,
+        "Nom_KPI": "Marge totale",
+        "Description": "Marge générée par les ventes.",
+        "Formule_SQL": "SUM(dbo.Fact_Ventes.Marge)",
+        "Unite": "EUR",
+        "Frequence": "JOURNALIÈRE"
+      },
+      {
+        "KPI_ID": 5,
+        "Nom_KPI": "Quantité vendue",
+        "Description": "Nombre total d'unités vendues.",
+        "Formule_SQL": "SUM(dbo.Fact_Ventes.Quantite)",
+        "Unite": "UNITÉ",
+        "Frequence": "JOURNALIÈRE"
+      }
+    ],
+    "rules": [
+      {
+        "Rule_ID": 1,
+        "Rule_Name": "Lecture uniquement",
+        "Rule_Type": "ALLOWED_OPERATION",
+        "Rule_Value": "SELECT",
+        "Description": "L'assistant IA peut uniquement générer des requêtes de lecture."
+      },
+      {
+        "Rule_ID": 2,
+        "Rule_Name": "Interdire UPDATE",
+        "Rule_Type": "FORBIDDEN_OPERATION",
+        "Rule_Value": "UPDATE",
+        "Description": "Les données métier ne doivent pas être modifiées par l'assistant."
+      },
+      {
+        "Rule_ID": 3,
+        "Rule_Name": "Interdire DELETE",
+        "Rule_Type": "FORBIDDEN_OPERATION",
+        "Rule_Value": "DELETE",
+        "Description": "Suppression interdite."
+      },
+      {
+        "Rule_ID": 4,
+        "Rule_Name": "Interdire INSERT",
+        "Rule_Type": "FORBIDDEN_OPERATION",
+        "Rule_Value": "INSERT",
+        "Description": "Insertion interdite."
+      },
+      {
+        "Rule_ID": 5,
+        "Rule_Name": "Interdire DROP",
+        "Rule_Type": "FORBIDDEN_OPERATION",
+        "Rule_Value": "DROP",
+        "Description": "Suppression de structures SQL interdite."
+      },
+      {
+        "Rule_ID": 6,
+        "Rule_Name": "Interdire ALTER",
+        "Rule_Type": "FORBIDDEN_OPERATION",
+        "Rule_Value": "ALTER",
+        "Description": "Modification du schéma interdite."
+      },
+      {
+        "Rule_ID": 7,
+        "Rule_Name": "Interdire TRUNCATE",
+        "Rule_Type": "FORBIDDEN_OPERATION",
+        "Rule_Value": "TRUNCATE",
+        "Description": "Vidage d'une table interdit."
+      },
+      {
+        "Rule_ID": 8,
+        "Rule_Name": "Tables autorisées",
+        "Rule_Type": "SECURITY",
+        "Rule_Value": "Utiliser uniquement les tables de AI_Allowed_Tables.",
+        "Description": "Empêche l'assistant d'interroger des tables non autorisées."
+      },
+      {
+        "Rule_ID": 9,
+        "Rule_Name": "Lecture uniquement",
+        "Rule_Type": "SAFETY",
+        "Rule_Value": "Autoriser uniquement SELECT.",
+        "Description": "Ne jamais générer INSERT, UPDATE, DELETE ou DROP."
+      },
+      {
+        "Rule_ID": 10,
+        "Rule_Name": "Pas de SELECT étoile",
+        "Rule_Type": "SQL_STYLE",
+        "Rule_Value": "Ne jamais utiliser SELECT *.",
+        "Description": "Lister explicitement les colonnes demandées."
+      },
+      {
+        "Rule_ID": 11,
+        "Rule_Name": "Utiliser les relations déclarées",
+        "Rule_Type": "JOINS",
+        "Rule_Value": "Utiliser Semantic_Relationships.",
+        "Description": "Éviter les jointures inventées par le modèle."
+      }
+    ],
+    "examples": [
+      {
+        "Example_ID": 1,
+        "Question": "Quel est le chiffre d'affaires total ?",
+        "Intent": "TOTAL_CA",
+        "SQL_Query": "SELECT SUM(f.Chiffre_Affaires) AS Chiffre_Affaires_Total\r\n     FROM Fact_Ventes f;",
+        "Explanation": "Le chiffre d'affaires total est la somme de Fact_Ventes.Chiffre_Affaires."
+      },
+      {
+        "Example_ID": 2,
+        "Question": "Quel est le CA par région ?",
+        "Intent": "CA_PAR_REGION",
+        "SQL_Query": "SELECT\r\n         r.Region,\r\n         SUM(f.Chiffre_Affaires) AS Chiffre_Affaires\r\n     FROM Fact_Ventes f\r\n     INNER JOIN Dim_Region r\r\n         ON f.Region_ID = r.Region_ID\r\n     GROUP BY r.Region\r\n     ORDER BY Chiffre_Affaires DESC;",
+        "Explanation": "Le CA est agrégé par région via Dim_Region."
+      },
+      {
+        "Example_ID": 3,
+        "Question": "Quel est le CA par catégorie en 2025 ?",
+        "Intent": "CA_PAR_CATEGORIE_ANNEE",
+        "SQL_Query": "SELECT\r\n         p.Categorie,\r\n         SUM(f.Chiffre_Affaires) AS Chiffre_Affaires\r\n     FROM Fact_Ventes f\r\n     INNER JOIN Dim_Produit p\r\n         ON f.Produit_ID = p.Produit_ID\r\n     INNER JOIN Dim_Date d\r\n         ON f.Date_ID = d.Date_ID\r\n     WHERE d.Annee = 2025\r\n     GROUP BY p.Categorie\r\n     ORDER BY Chiffre_Affaires DESC;",
+        "Explanation": "Le CA est agrégé par catégorie et filtré sur l'année 2025."
+      },
+      {
+        "Example_ID": 4,
+        "Question": "Quel est le chiffre d'affaires total ?",
+        "Intent": "Calculer le chiffre d'affaires total",
+        "SQL_Query": "\r\n    SELECT\r\n        SUM(fv.Chiffre_Affaires) AS Chiffre_Affaires_Total\r\n    FROM dbo.Fact_Ventes AS fv;\r\n    ",
+        "Explanation": "La colonne Chiffre_Affaires est une mesure additive."
+      },
+      {
+        "Example_ID": 5,
+        "Question": "Quel est le chiffre d'affaires par région ?",
+        "Intent": "Agrégation du chiffre d'affaires par région",
+        "SQL_Query": "\r\n    SELECT\r\n        dr.Region,\r\n        SUM(fv.Chiffre_Affaires) AS Chiffre_Affaires_Total\r\n    FROM dbo.Fact_Ventes AS fv\r\n    INNER JOIN dbo.Dim_Region AS dr\r\n        ON fv.Region_ID = dr.Region_ID\r\n    GROUP BY\r\n        dr.Region\r\n    ORDER BY\r\n        Chiffre_Affaires_Total DESC;\r\n    ",
+        "Explanation": "La table Fact_Ventes est reliée à Dim_Region par Region_ID."
+      }
+    ],
+    "relationships": [
+      {
+        "Relationship_ID": 1,
+        "Source_Table": "dbo.Fact_Ventes",
+        "Source_Column": "Client_ID",
+        "Target_Table": "dbo.Dim_Client",
+        "Target_Column": "Client_ID",
+        "Relationship_Type": "MANY_TO_ONE",
+        "Description": "Une ou plusieurs ventes peuvent être associées à un même client."
+      },
+      {
+        "Relationship_ID": 2,
+        "Source_Table": "Fact_Ventes",
+        "Source_Column": "Produit_ID",
+        "Target_Table": "Dim_Produit",
+        "Target_Column": "Produit_ID",
+        "Relationship_Type": "MANY_TO_ONE",
+        "Description": "Une ou plusieurs ventes peuvent concerner un même produit."
+      },
+      {
+        "Relationship_ID": 3,
+        "Source_Table": "Fact_Ventes",
+        "Source_Column": "Region_ID",
+        "Target_Table": "Dim_Region",
+        "Target_Column": "Region_ID",
+        "Relationship_Type": "MANY_TO_ONE",
+        "Description": "Une ou plusieurs ventes peuvent être associées à une même région."
+      },
+      {
+        "Relationship_ID": 4,
+        "Source_Table": "Fact_Ventes",
+        "Source_Column": "Date_ID",
+        "Target_Table": "Dim_Date",
+        "Target_Column": "Date_ID",
+        "Relationship_Type": "MANY_TO_ONE",
+        "Description": "Une ou plusieurs ventes peuvent être associées à une même date."
+      }
+    ],
+    "synonyms": [
+      {
+        "Synonym_ID": 1,
+        "Entity_ID": 1,
+        "Synonym": "CA"
+      },
+      {
+        "Synonym_ID": 4,
+        "Entity_ID": 1,
+        "Synonym": "CA"
+      },
+      {
+        "Synonym_ID": 2,
+        "Entity_ID": 1,
+        "Synonym": "chiffre affaire"
+      },
+      {
+        "Synonym_ID": 3,
+        "Entity_ID": 1,
+        "Synonym": "ventes"
+      },
+      {
+        "Synonym_ID": 5,
+        "Entity_ID": 2,
+        "Synonym": "marge commerciale"
+      },
+      {
+        "Synonym_ID": 6,
+        "Entity_ID": 2,
+        "Synonym": "profit"
+      }
+    ]
+  }
+}

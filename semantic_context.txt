@@ -1,0 +1,456 @@
+============================================================
+CONTEXTE SÉMANTIQUE POUR L'ASSISTANT DATA
+============================================================
+Objectif :
+Transformer une question métier en requête SQL Server en
+respectant le modèle de données, les définitions métier et
+les règles de sécurité.
+
+PÉRIMÈTRE DES DONNÉES :
+- Business_KPI
+  Usage : Référentiel officiel des KPI métier.
+- dbo.Dim_Client
+  Usage : Dimension contenant les informations clients.
+- dbo.Dim_Date
+  Usage : Dimension calendrier utilisée pour les analyses temporelles.
+- dbo.Dim_Produit
+  Usage : Dimension contenant les produits et catégories.
+- dbo.Dim_Region
+  Usage : Dimension contenant les régions et pays.
+- dbo.Fact_Ventes
+  Usage : Table centrale contenant les ventes et les mesures commerciales.
+- Dim_Client
+  Usage : Informations descriptives sur les clients.
+- Dim_Date
+  Usage : Dimension temporelle.
+- Dim_Produit
+  Usage : Informations descriptives sur les produits.
+- Dim_Region
+  Usage : Informations géographiques.
+- Documentation_Metier
+  Usage : Documentation et définitions métier.
+- DQ_Score
+  Usage : Score de qualité des données.
+- Fact_Ventes
+  Usage : Table principale contenant les transactions commerciales.
+
+DICTIONNAIRE MÉTIER :
+- Business_KPI.Chiffre_Affaires
+  Nom métier : CA total
+  Définition : Chiffre d'affaires total généré sur la période analysée.
+  Type métier : KPI
+  Unité : EUR
+  Règle métier : SUM(Fact_Ventes.Chiffre_Affaires)
+- dbo.Dim_Client.Segment
+  Nom métier : Segment client
+  Définition : Catégorie commerciale attribuée au client.
+  Type métier : DIMENSION
+  Règle métier : Utiliser cette colonne pour segmenter les clients.
+  Exemple : Premium
+- dbo.Fact_Ventes.Chiffre_Affaires
+  Nom métier : Chiffre d'affaires
+  Définition : Montant généré par une vente.
+  Type métier : MESURE
+  Unité : EUR
+  Règle métier : Sommer la colonne pour obtenir le chiffre d'affaires.
+  Exemple : 1250.50
+- dbo.Fact_Ventes.Marge
+  Nom métier : Marge commerciale
+  Définition : Différence entre le chiffre d'affaires et le coût.
+  Type métier : MESURE
+  Unité : EUR
+  Règle métier : Sommer la colonne pour obtenir la marge totale.
+  Exemple : 350.00
+- dbo.Fact_Ventes.Quantite
+  Nom métier : Quantité vendue
+  Définition : Nombre d'unités vendues.
+  Type métier : MESURE
+  Unité : UNITÉ
+  Règle métier : Sommer la colonne pour obtenir le volume vendu.
+  Exemple : 10
+- Dim_Client.Client_ID
+  Nom métier : Identifiant client
+  Définition : Identifiant unique permettant d'identifier un client.
+  Type métier : Identifiant
+  Règle métier : Un Client_ID identifie un seul client.
+- Dim_Date.Annee
+  Nom métier : Année
+  Définition : Année calendaire.
+  Type métier : Dimension temporelle
+  Exemple : 2025
+- Dim_Date.Date
+  Nom métier : Date
+  Définition : Date calendaire associée à la vente.
+  Type métier : Date
+  Exemple : 2025-01-15
+- Dim_Date.Date_ID
+  Nom métier : Identifiant date
+  Définition : Identifiant unique de la date dans le calendrier.
+  Type métier : Identifiant
+  Règle métier : Clé de liaison avec Fact_Ventes.Date_ID.
+  Exemple : 20250115
+- Dim_Date.Mois
+  Nom métier : Mois
+  Définition : Numéro du mois calendaire.
+  Type métier : Dimension temporelle
+  Règle métier : Valeurs attendues : 1 à 12.
+  Exemple : 3
+- Dim_Date.Nom_Mois
+  Nom métier : Nom du mois
+  Définition : Nom du mois calendaire.
+  Type métier : Dimension temporelle
+  Exemple : Mars
+- Dim_Date.Semaine
+  Nom métier : Semaine
+  Définition : Numéro de semaine calendaire.
+  Type métier : Dimension temporelle
+  Exemple : 12
+- Dim_Date.Trimestre
+  Nom métier : Trimestre
+  Définition : Numéro du trimestre calendaire.
+  Type métier : Dimension temporelle
+  Règle métier : Valeurs attendues : 1 à 4.
+  Exemple : 1
+- Dim_Produit.Categorie
+  Nom métier : Catégorie produit
+  Définition : Catégorie commerciale principale du produit.
+  Type métier : Dimension
+  Exemple : Électronique
+- Dim_Produit.Nom_Produit
+  Nom métier : Nom du produit
+  Définition : Nom commercial du produit.
+  Type métier : Attribut
+  Exemple : Produit A
+- Dim_Produit.Prix_Unitaire
+  Nom métier : Prix unitaire
+  Définition : Prix de vente unitaire du produit.
+  Type métier : Mesure financière
+  Unité : EUR
+  Règle métier : Prix associé à une unité du produit.
+  Exemple : 250.00
+- Dim_Produit.Produit_ID
+  Nom métier : Identifiant produit
+  Définition : Identifiant unique du produit.
+  Type métier : Identifiant
+  Règle métier : Clé permettant de relier les produits aux ventes.
+  Exemple : 42
+- Dim_Produit.Sous_Categorie
+  Nom métier : Sous-catégorie produit
+  Définition : Sous-catégorie commerciale du produit.
+  Type métier : Dimension
+  Exemple : Accessoires
+- Dim_Region.Pays
+  Nom métier : Pays
+  Définition : Pays associé à la région.
+  Type métier : Dimension géographique
+  Exemple : France
+- Dim_Region.Region
+  Nom métier : Région
+  Définition : Nom de la région commerciale.
+  Type métier : Dimension géographique
+  Exemple : Île-de-France
+- Dim_Region.Region_ID
+  Nom métier : Identifiant région
+  Définition : Identifiant unique de la région.
+  Type métier : Identifiant
+  Règle métier : Clé permettant de relier les régions aux ventes.
+  Exemple : 7
+- Fact_Ventes.Chiffre_Affaires
+  Nom métier : Chiffre d'affaires
+  Définition : Montant généré par la vente.
+  Type métier : Mesure financière
+  Unité : EUR
+  Règle métier : Le CA correspond au montant de la vente.
+  Exemple : 1250.50
+- Fact_Ventes.Chiffre_Affaires
+  Nom métier : Chiffre d'affaires
+  Définition : Montant généré par la vente.
+  Type métier : KPI financier
+  Unité : EUR
+  Règle métier : CA = Prix_Unitaire × Quantite.
+- Fact_Ventes.Client_ID
+  Nom métier : Client
+  Définition : Référence du client ayant réalisé la vente.
+  Type métier : Dimension
+  Règle métier : Fact_Ventes.Client_ID = Dim_Client.Client_ID
+  Exemple : 125
+- Fact_Ventes.Cout
+  Nom métier : Coût
+  Définition : Coût associé à la vente.
+  Type métier : Mesure financière
+  Unité : EUR
+  Règle métier : Le coût est une valeur monétaire positive ou nulle.
+  Exemple : 800.00
+- Fact_Ventes.Cout
+  Nom métier : Coût
+  Définition : Coût associé à la vente.
+  Type métier : KPI financier
+  Unité : EUR
+  Règle métier : Le coût doit être supérieur ou égal à zéro.
+- Fact_Ventes.Date_ID
+  Nom métier : Date de vente
+  Définition : Référence vers la dimension calendrier permettant d'analyser les ventes dans le temps.
+  Type métier : Dimension temporelle
+  Règle métier : Fact_Ventes.Date_ID = Dim_Date.Date_ID
+  Exemple : 20250115
+- Fact_Ventes.Marge
+  Nom métier : Marge commerciale
+  Définition : Différence entre le chiffre d'affaires et le coût.
+  Type métier : KPI financier
+  Unité : EUR
+  Règle métier : Marge = Chiffre_Affaires - Cout.
+- Fact_Ventes.Marge
+  Nom métier : Marge
+  Définition : Différence entre le chiffre d'affaires et le coût.
+  Type métier : Mesure financière
+  Unité : EUR
+  Règle métier : Marge = Chiffre_Affaires - Cout.
+  Exemple : 450.50
+- Fact_Ventes.Produit_ID
+  Nom métier : Produit
+  Définition : Référence du produit vendu.
+  Type métier : Dimension
+  Règle métier : Fact_Ventes.Produit_ID = Dim_Produit.Produit_ID
+  Exemple : 42
+- Fact_Ventes.Quantite
+  Nom métier : Quantité vendue
+  Définition : Nombre d'unités vendues lors de la transaction.
+  Type métier : Mesure
+  Unité : Unité
+  Règle métier : La quantité doit être strictement supérieure à zéro.
+  Exemple : 5
+- Fact_Ventes.Quantite
+  Nom métier : Quantité vendue
+  Définition : Nombre d'unités vendues lors de la transaction.
+  Type métier : Mesure
+  Unité : Unité
+  Règle métier : La quantité doit être strictement supérieure à zéro.
+- Fact_Ventes.Region_ID
+  Nom métier : Région
+  Définition : Référence géographique associée à la vente.
+  Type métier : Dimension
+  Règle métier : Fact_Ventes.Region_ID = Dim_Region.Region_ID
+  Exemple : 7
+- Fact_Ventes.Vente_ID
+  Nom métier : Identifiant de vente
+  Définition : Identifiant unique d'une transaction commerciale.
+  Type métier : Identifiant
+  Règle métier : Chaque vente possède un identifiant unique.
+  Exemple : 100245
+- Fact_Ventes.Vente_ID
+  Nom métier : Identifiant de vente
+  Définition : Identifiant unique d'une transaction de vente.
+  Type métier : Identifiant
+  Règle métier : Une vente possède un identifiant unique.
+
+KPI ET MESURES MÉTIER :
+- Chiffre d'affaires
+  Définition : Montant total généré par les ventes
+  Formule SQL : SUM(Fact_Ventes.Chiffre_Affaires)
+  Unité : EUR
+  Fréquence : Mensuelle
+- Chiffre d'affaires
+  Définition : Montant total des ventes.
+  Formule SQL : SUM(dbo.Fact_Ventes.Chiffre_Affaires)
+  Unité : EUR
+  Fréquence : JOURNALIÈRE
+- Marge
+  Définition : Chiffre d'affaires moins les coûts
+  Formule SQL : SUM(Fact_Ventes.Marge)
+  Unité : EUR
+  Fréquence : Mensuelle
+- Marge %
+  Définition : Marge rapportée au chiffre d'affaires
+  Formule SQL : SUM(Fact_Ventes.Marge) / NULLIF(SUM(Fact_Ventes.Chiffre_Affaires),0)
+  Unité : %
+  Fréquence : Mensuelle
+- Marge totale
+  Définition : Marge générée par les ventes.
+  Formule SQL : SUM(dbo.Fact_Ventes.Marge)
+  Unité : EUR
+  Fréquence : JOURNALIÈRE
+- Quantité vendue
+  Définition : Nombre total d'unités vendues.
+  Formule SQL : SUM(dbo.Fact_Ventes.Quantite)
+  Unité : UNITÉ
+  Fréquence : JOURNALIÈRE
+
+SCHÉMA MÉTIER ET TECHNIQUE :
+- Table : dbo.Business_KPI
+  - KPI_ID: int, obligatoire, clé primaire
+  - Nom_KPI: nvarchar, nullable
+  - Description: nvarchar, nullable
+  - Formule_SQL: nvarchar, nullable
+  - Unite: nvarchar, nullable
+  - Frequence: nvarchar, nullable
+- Table : dbo.Dim_Client
+  - Client_ID: int, obligatoire, clé primaire
+  - Nom_Client: nvarchar, nullable
+  - Segment: nvarchar, nullable — Catégorie commerciale attribuée au client.
+  - Date_Inscription: date, nullable
+  - Statut: nvarchar, nullable
+- Table : dbo.Dim_Date
+  - Date_ID: int, obligatoire, clé primaire
+  - Date: date, obligatoire
+  - Annee: int, nullable
+  - Trimestre: int, nullable
+  - Mois: int, nullable
+  - Nom_Mois: nvarchar, nullable
+  - Semaine: int, nullable
+- Table : dbo.Dim_Produit
+  - Produit_ID: int, obligatoire, clé primaire
+  - Nom_Produit: nvarchar, nullable
+  - Categorie: nvarchar, nullable
+  - Sous_Categorie: nvarchar, nullable
+  - Prix_Unitaire: decimal, nullable
+- Table : dbo.Dim_Region
+  - Region_ID: int, obligatoire, clé primaire
+  - Region: nvarchar, nullable
+  - Pays: nvarchar, nullable
+- Table : dbo.Documentation_Metier
+  - Document_ID: int, obligatoire, clé primaire
+  - Titre: nvarchar, nullable
+  - Categorie: nvarchar, nullable
+  - Contenu: nvarchar, nullable
+  - Date_Mise_A_Jour: date, nullable
+- Table : dbo.DQ_Score
+  - Score_ID: int, obligatoire, clé primaire
+  - Date_Calcul: datetime, nullable
+  - Score_Completude: decimal, nullable
+  - Score_Validite: decimal, nullable
+  - Score_Coherence: decimal, nullable
+  - Score_Global: decimal, nullable
+  - Niveau_Qualite: nvarchar, nullable
+- Table : dbo.Fact_Ventes
+  - Vente_ID: int, obligatoire, clé primaire
+  - Date_ID: int, obligatoire
+  - Client_ID: int, obligatoire
+  - Produit_ID: int, obligatoire
+  - Region_ID: int, obligatoire
+  - Quantite: int, nullable — Nombre d'unités vendues.
+  - Chiffre_Affaires: decimal, nullable — Montant généré par une vente.
+  - Cout: decimal, nullable
+  - Marge: decimal, nullable — Différence entre le chiffre d'affaires et le coût.
+
+RELATIONS ET JOINTURES AUTORISÉES :
+- dbo.Fact_Ventes.Client_ID = dbo.Dim_Client.Client_ID
+  Type : MANY_TO_ONE
+  Signification : Une ou plusieurs ventes peuvent être associées à un même client.
+- Fact_Ventes.Produit_ID = Dim_Produit.Produit_ID
+  Type : MANY_TO_ONE
+  Signification : Une ou plusieurs ventes peuvent concerner un même produit.
+- Fact_Ventes.Region_ID = Dim_Region.Region_ID
+  Type : MANY_TO_ONE
+  Signification : Une ou plusieurs ventes peuvent être associées à une même région.
+- Fact_Ventes.Date_ID = Dim_Date.Date_ID
+  Type : MANY_TO_ONE
+  Signification : Une ou plusieurs ventes peuvent être associées à une même date.
+
+SYNONYMES MÉTIER :
+- CA (entité : 1)
+- CA (entité : 1)
+- chiffre affaire (entité : 1)
+- ventes (entité : 1)
+- marge commerciale (entité : 2)
+- profit (entité : 2)
+
+RÈGLES DE GÉNÉRATION SQL :
+- Lecture uniquement
+  Type : ALLOWED_OPERATION
+  Valeur : SELECT
+  Description : L'assistant IA peut uniquement générer des requêtes de lecture.
+- Interdire UPDATE
+  Type : FORBIDDEN_OPERATION
+  Valeur : UPDATE
+  Description : Les données métier ne doivent pas être modifiées par l'assistant.
+- Interdire DELETE
+  Type : FORBIDDEN_OPERATION
+  Valeur : DELETE
+  Description : Suppression interdite.
+- Interdire INSERT
+  Type : FORBIDDEN_OPERATION
+  Valeur : INSERT
+  Description : Insertion interdite.
+- Interdire DROP
+  Type : FORBIDDEN_OPERATION
+  Valeur : DROP
+  Description : Suppression de structures SQL interdite.
+- Interdire ALTER
+  Type : FORBIDDEN_OPERATION
+  Valeur : ALTER
+  Description : Modification du schéma interdite.
+- Interdire TRUNCATE
+  Type : FORBIDDEN_OPERATION
+  Valeur : TRUNCATE
+  Description : Vidage d'une table interdit.
+- Tables autorisées
+  Type : SECURITY
+  Valeur : Utiliser uniquement les tables de AI_Allowed_Tables.
+  Description : Empêche l'assistant d'interroger des tables non autorisées.
+- Lecture uniquement
+  Type : SAFETY
+  Valeur : Autoriser uniquement SELECT.
+  Description : Ne jamais générer INSERT, UPDATE, DELETE ou DROP.
+- Pas de SELECT étoile
+  Type : SQL_STYLE
+  Valeur : Ne jamais utiliser SELECT *.
+  Description : Lister explicitement les colonnes demandées.
+- Utiliser les relations déclarées
+  Type : JOINS
+  Valeur : Utiliser Semantic_Relationships.
+  Description : Éviter les jointures inventées par le modèle.
+
+EXEMPLES VALIDÉS :
+- Question : Quel est le chiffre d'affaires total ?
+  Intention : TOTAL_CA
+  SQL validé : SELECT SUM(f.Chiffre_Affaires) AS Chiffre_Affaires_Total
+     FROM Fact_Ventes f;
+  Explication : Le chiffre d'affaires total est la somme de Fact_Ventes.Chiffre_Affaires.
+- Question : Quel est le CA par région ?
+  Intention : CA_PAR_REGION
+  SQL validé : SELECT
+         r.Region,
+         SUM(f.Chiffre_Affaires) AS Chiffre_Affaires
+     FROM Fact_Ventes f
+     INNER JOIN Dim_Region r
+         ON f.Region_ID = r.Region_ID
+     GROUP BY r.Region
+     ORDER BY Chiffre_Affaires DESC;
+  Explication : Le CA est agrégé par région via Dim_Region.
+- Question : Quel est le CA par catégorie en 2025 ?
+  Intention : CA_PAR_CATEGORIE_ANNEE
+  SQL validé : SELECT
+         p.Categorie,
+         SUM(f.Chiffre_Affaires) AS Chiffre_Affaires
+     FROM Fact_Ventes f
+     INNER JOIN Dim_Produit p
+         ON f.Produit_ID = p.Produit_ID
+     INNER JOIN Dim_Date d
+         ON f.Date_ID = d.Date_ID
+     WHERE d.Annee = 2025
+     GROUP BY p.Categorie
+     ORDER BY Chiffre_Affaires DESC;
+  Explication : Le CA est agrégé par catégorie et filtré sur l'année 2025.
+- Question : Quel est le chiffre d'affaires total ?
+  Intention : Calculer le chiffre d'affaires total
+  SQL validé : 
+    SELECT
+        SUM(fv.Chiffre_Affaires) AS Chiffre_Affaires_Total
+    FROM dbo.Fact_Ventes AS fv;
+    
+  Explication : La colonne Chiffre_Affaires est une mesure additive.
+- Question : Quel est le chiffre d'affaires par région ?
+  Intention : Agrégation du chiffre d'affaires par région
+  SQL validé : 
+    SELECT
+        dr.Region,
+        SUM(fv.Chiffre_Affaires) AS Chiffre_Affaires_Total
+    FROM dbo.Fact_Ventes AS fv
+    INNER JOIN dbo.Dim_Region AS dr
+        ON fv.Region_ID = dr.Region_ID
+    GROUP BY
+        dr.Region
+    ORDER BY
+        Chiffre_Affaires_Total DESC;
+    
+  Explication : La table Fact_Ventes est reliée à Dim_Region par Region_ID.

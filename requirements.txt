@@ -1,0 +1,14 @@
+python-dotenv
+pyodbc
+pandas
+sqlalchemy
+fastapi
+uvicorn
+pydantic
+pytest
+openai
+sqlglot
+matplotlib
+numpy
+scikit-learn
+statsmodels

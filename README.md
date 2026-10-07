@@ -3,9 +3,7 @@ title: Assistant Data
 emoji: 📊
 colorFrom: blue
 colorTo: indigo
-sdk: gradio
-sdk_version: "5.0.0"
-app_file: app/main.py
+sdk: docker
 pinned: false
 ---
 

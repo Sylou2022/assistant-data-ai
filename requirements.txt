@@ -12,3 +12,4 @@ matplotlib
 numpy
 scikit-learn
 statsmodels
+gradio

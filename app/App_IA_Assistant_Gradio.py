@@ -6,6 +6,7 @@ Lancement (depuis la racine du projet) :
 """
 
 from __future__ import annotations
+import os
 
 import html
 import logging
@@ -3008,4 +3009,6 @@ if __name__ == "__main__":
         theme=THEME,
         css=CSS,
         js=FORCE_LIGHT_JS,
+        server_name="0.0.0.0",
+        server_port=int(os.environ.get("PORT", 7860)),
     )

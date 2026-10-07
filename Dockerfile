@@ -3,8 +3,10 @@ FROM python:3.10-slim
 RUN apt-get update && apt-get install -y \
     curl \
     gnupg \
+    libodbc2 \
     unixodbc \
     unixodbc-dev \
+    odbcinst \
     && rm -rf /var/lib/apt/lists/*
 
 RUN curl -sSL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor -o /usr/share/keyrings/microsoft-prod.gpg

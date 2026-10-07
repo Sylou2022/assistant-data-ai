@@ -2743,7 +2743,7 @@ def build_app() -> gr.Blocks:
                 value=build_about_html(),
                 elem_id="about-content",
             )
-            
+            #........................
 
         # about_close_trigger = gr.Button(
         #     "Retour",

@@ -382,7 +382,7 @@ class ForecastingModel:
             )
         ]
 
-#..........................
+#..................................
 
         logger.info(
             "🏆 Classement des modèles de forecasting : %s",

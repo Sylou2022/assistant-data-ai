@@ -1365,6 +1365,7 @@ aside .gradio-dataset .wrap {
 }
 
 
+
 #about-button {
     width: auto !important;
     min-width: 0 !important;
@@ -1416,10 +1417,10 @@ aside .gradio-dataset .wrap {
     background: #eef2ff !important;
 }
 
-
+/*=====
 /* =========================================================
    BOUTON RETOUR — PAGE À PROPOS
-   ========================================================= */
+   =========================================================== */
 
 #about-page-container {
     width: 100% !important;

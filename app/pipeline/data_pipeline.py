@@ -250,7 +250,7 @@ class DataPipeline:
             print(f"[WARN] Agent indisponible, repli sur le pipeline classique : {exc}")
             return self.run(question)
 
-    # =================================================================
+    # ============================================================================
     # PIPELINE CLASSIQUE
     # =================================================================
 

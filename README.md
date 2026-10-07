@@ -50,4 +50,4 @@ Question utilisateur
 - Gradio
 - OpenAI API
 - SQLGlot
->>>>>>> 4baafb6db95ef4b99a5e3e027a1913027a293ef9
+

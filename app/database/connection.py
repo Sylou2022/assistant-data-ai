@@ -19,7 +19,7 @@ def get_connection_string() -> str:
     password = os.getenv("SQL_PASSWORD")
     trusted_connection = os.getenv(
         "SQL_TRUSTED_CONNECTION",
-        "yes",
+        "no",                   #.......................................
     )
     trust_server_certificate = os.getenv(
         "SQL_TRUST_SERVER_CERTIFICATE",
@@ -38,7 +38,7 @@ def get_connection_string() -> str:
             f"SERVER={server};"
             f"DATABASE={database};"
             "Trusted_Connection=yes;"
-            "Encrypt=no;"
+            "Encrypt=yes;"
             f"TrustServerCertificate={trust_server_certificate};"
             "ApplicationIntent=ReadOnly;"
         )

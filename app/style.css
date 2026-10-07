@@ -1,0 +1,1479 @@
+
+/* CSS = """ */
+
+/* =========================================================
+   POLICE GLOBALE
+   ========================================================= */
+
+* {
+    font-family: Arial, Helvetica, sans-serif !important;
+}
+
+
+/* =========================================================
+   CONTENEUR PRINCIPAL
+   ========================================================= */
+
+.gradio-container {
+    max-width: 1500px !important;
+    background: #ffffff !important;
+    padding-top: 76px !important;
+}
+
+
+/* =========================================================
+   HEADER FIXE
+   ========================================================= */
+
+#entete {
+    position: fixed !important;
+
+    top: 0 !important;
+    left: 0 !important;
+
+    width: 100vw !important;
+
+    height: 76px !important;
+    min-height: 76px !important;
+
+    margin: 0 !important;
+    padding: 0 20px 0 0 !important;
+
+    z-index: 999999 !important;
+
+    background: #ffffff !important;
+
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12) !important;
+
+    /*
+       On laisse dépasser les éléments du header
+       si nécessaire, mais ils sont positionnés
+       à l'intérieur des 92px.
+    */
+    overflow: visible !important;
+
+    box-sizing: border-box !important;
+
+    align-items: center !important;
+}
+
+
+/* =========================================================
+   PARTIE GAUCHE : LOGO + TITRE
+   ========================================================= */
+
+#entete-gauche {
+    height: 76px !important;
+    min-height: 76px !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    display: flex !important;
+    flex-direction: row !important;
+
+    align-items: center !important;
+
+    overflow: visible !important;
+}
+
+
+/* =========================================================
+   LOGO
+   ========================================================= */
+
+#logo {
+    position: relative !important;
+
+    /*
+       Légèrement vers la gauche
+    */
+    left: -12px !important;
+
+    /*
+       Très léger ajustement vertical
+    */
+    top: -2px !important;
+
+    width: 44px !important;
+    height: 44px !important;
+    min-width: 44px !important;
+
+    margin: 0 12px 0 0 !important;
+    padding: 0 !important;
+
+    z-index: 1000000 !important;
+
+    overflow: visible !important;
+}
+
+
+/* =========================================================
+   TITRE + SOUS-TITRE
+   ========================================================= */
+
+#titre {
+    position: relative !important;
+
+    height: 76px !important;
+    min-height: 76px !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+
+    justify-content: center !important;
+    align-items: flex-start !important;
+
+    overflow: visible !important;
+}
+
+
+/* Titre principal */
+#titre h1 {
+    display: block !important;
+
+    margin: 0 0 4px 0 !important;
+    padding: 0 !important;
+
+    font-size: 1.35rem !important;
+    line-height: 1.05 !important;
+}
+
+
+/* Sous-titre */
+#titre p {
+    display: block !important;
+
+    visibility: visible !important;
+    opacity: 1 !important;
+
+    height: auto !important;
+    max-height: none !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    font-size: 0.78rem !important;
+    line-height: 1.1 !important;
+
+    overflow: visible !important;
+}
+
+
+/* =========================================================
+   KPI — CONTENEUR
+   ========================================================= */
+
+/*
+   IMPORTANT :
+
+   On ne déplace plus #kpi avec transform.
+   Les KPI et les badges sont positionnés
+   indépendamment avec position:absolute.
+
+   Cela évite que les badges suivent les KPI.
+*/
+
+#kpi {
+    position: static !important;
+
+    width: 0 !important;
+    min-width: 0 !important;
+
+    height: 0 !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+
+/* =========================================================
+   CONTENEUR GLOBAL DES KPI
+   ========================================================= */
+
+#kpi .kpi-section {
+    position: static !important;
+
+    width: 0 !important;
+    height: 0 !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    display: block !important;
+}
+
+
+/* =========================================================
+   CARTES KPI
+   ========================================================= */
+
+/*
+   Les cartes restent en haut à droite,
+   mais avec un espace par rapport au bord droit.
+*/
+
+#kpi .metrics {
+    position: absolute !important;
+
+    top: 7px !important;
+
+    /*
+       Plus cette valeur augmente,
+       plus les KPI vont vers la gauche.
+    */
+    right: 120px !important;
+
+    width: auto !important;
+
+    height: auto !important;
+
+    display: flex !important;
+
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+
+    justify-content: flex-end !important;
+    align-items: stretch !important;
+
+    gap: 8px !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    z-index: 1000000 !important;
+}
+
+
+/* Taille des cartes KPI */
+#kpi .metrics > * {
+    flex: 0 0 auto !important;
+
+    width: auto !important;
+
+    min-width: 130px !important;
+
+    padding: 6px 10px !important;
+
+    min-height: 42px !important;
+
+    box-sizing: border-box !important;
+}
+
+
+/* Texte dans les KPI */
+#kpi .metrics h1,
+#kpi .metrics h2,
+#kpi .metrics h3,
+#kpi .metrics p {
+    margin: 0 !important;
+
+    line-height: 1.05 !important;
+}
+
+
+/* =========================================================
+   BADGES — CENTRÉS AU-DESSUS DE LA VISUALISATION
+   ========================================================= */
+
+#kpi .kpi-status-row {
+    position: absolute !important;
+
+    bottom: 5px !important;
+
+    /*
+       Centré puis légèrement décalé vers la gauche.
+    */
+    left: 60% !important;
+
+    transform: translateX(-65%) !important;
+
+    width: auto !important;
+
+    height: auto !important;
+
+    display: flex !important;
+
+    flex-direction: row !important;
+
+    flex-wrap: nowrap !important;
+
+    justify-content: center !important;
+
+    align-items: center !important;
+
+    gap: 6px !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    z-index: 1000000 !important;
+}
+
+
+/* Chaque badge */
+#kpi .kpi-status-row .kpi-badge {
+    margin: 0 !important;
+
+    white-space: nowrap !important;
+}
+
+
+/* =========================================================
+   REQUÊTE SQL
+   ========================================================= */
+
+#titre-sql {
+    margin-top: 14px !important;
+    margin-bottom: 6px !important;
+}
+
+
+#sql-box {
+    background: #e5e7eb !important;
+
+    border: 1px solid #d1d5db !important;
+
+    border-radius: 8px !important;
+
+    padding: 10px !important;
+}
+
+
+/* =========================================================
+   ESPACE SOUS LE HEADER
+   ========================================================= */
+
+#workspace {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+
+#chat-column,
+#results-column {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+
+    min-width: 0 !important;
+}
+
+
+/* Premier élément des colonnes */
+#chat-column > :first-child,
+#results-column > :first-child {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+
+/* Lignes internes de Gradio */
+#workspace > div {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+}
+
+
+/* =========================================================
+   CHATBOT / GRAPHIQUE
+   ========================================================= */
+
+#chatbot {
+    margin-top: 0 !important;
+}
+
+
+#graphique-principal {
+    margin-top: 0 !important;
+}
+
+
+/* =========================================================
+   RÉSULTATS
+   ========================================================= */
+
+#table {
+    margin-top: 10px;
+}
+
+
+#results-column {
+    min-width: 0 !important;
+}
+
+
+/* =========================================================
+   INFORMATIONS TECHNIQUES
+   ========================================================= */
+
+#technical-tabs {
+    margin-top: 12px;
+}
+
+
+/* =========================================================
+   CARTES KPI — STYLE
+   ========================================================= */
+
+.metrics {
+    display: flex;
+
+    gap: 12px;
+
+    flex-wrap: wrap;
+
+    margin: 4px 0 10px;
+
+    align-items: stretch;
+}
+
+
+.metric-card {
+    flex: 1 1 180px;
+
+    min-width: 0;
+
+    padding: 14px 18px;
+
+    border-radius: 14px;
+
+    background: linear-gradient(
+        135deg,
+        #4f46e5,
+        #6366f1
+    );
+
+    border: 1px solid #4f46e5;
+
+    box-shadow:
+        0 4px 14px rgba(79, 70, 229, .25);
+
+    box-sizing: border-box;
+}
+
+
+.metric-card.alt {
+    background: #ffffff;
+
+    border: 1px solid #c7d2fe;
+
+    box-shadow:
+        0 2px 8px rgba(79, 70, 229, .08);
+}
+
+
+.metric-card:not(.alt) * {
+    color: #ffffff !important;
+}
+
+
+.metric-card.alt * {
+    color: #3730a3 !important;
+}
+
+
+/* Libellé KPI */
+.metric-label {
+    font-family: Arial, Helvetica, sans-serif !important;
+
+    font-size: .78rem !important;
+
+    line-height: 1.2 !important;
+
+    opacity: .85;
+
+    text-transform: uppercase;
+
+    letter-spacing: .05em;
+}
+
+
+/* Valeur KPI */
+.metric-value {
+    font-family: Arial, Helvetica, sans-serif !important;
+
+    font-size: 1.8rem !important;
+
+    font-weight: 700 !important;
+
+    line-height: 1.25 !important;
+
+    white-space: nowrap;
+}
+
+
+/* Sous-texte KPI */
+.metric-sub {
+    font-family: Arial, Helvetica, sans-serif !important;
+
+    font-size: .9rem !important;
+
+    line-height: 1.3 !important;
+
+    opacity: .85;
+}
+
+
+/* =========================================================
+   PASTILLES KPI
+   ========================================================= */
+
+.kpi-badge {
+    display: inline-block;
+
+    padding: 4px 14px;
+
+    margin: 0 8px 6px 0;
+
+    border-radius: 999px;
+
+    font-family: Arial, Helvetica, sans-serif !important;
+
+    font-weight: 600;
+
+    font-size: .9rem;
+
+    background: #eef2ff;
+
+    color: #3730a3;
+
+    border: 1px solid #c7d2fe;
+}
+
+
+.kpi-badge.teal {
+    background: #ccfbf1;
+
+    color: #115e59;
+
+    border-color: #99f6e4;
+}
+
+
+.kpi-badge.green {
+    background: #dcfce7;
+
+    color: #166534;
+
+    border-color: #86efac;
+}
+
+
+.kpi-badge.orange {
+    background: #ffedd5;
+
+    color: #9a3412;
+
+    border-color: #fdba74;
+}
+
+
+.kpi-badge.red {
+    background: #fee2e2;
+
+    color: #991b1b;
+
+    border-color: #fca5a5;
+}
+
+
+/* =========================================================
+   ZONE DE SAISIE
+   ========================================================= */
+
+#saisie {
+    align-items: stretch;
+
+    gap: 10px;
+
+    margin-top: 10px;
+}
+
+
+#saisie textarea {
+    min-height: 64px !important;
+
+    padding: 15px 18px !important;
+
+    font-family: Arial, Helvetica, sans-serif !important;
+
+    font-size: 15px !important;
+
+    line-height: 1.45 !important;
+
+    color: #1e1b4b !important;
+
+    background: #ffffff !important;
+
+    border: 1.5px solid #c7d2fe !important;
+
+    border-radius: 14px !important;
+
+    box-shadow:
+        0 2px 6px rgba(30, 41, 59, 0.06),
+        0 6px 18px rgba(79, 70, 229, 0.08) !important;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease !important;
+}
+
+
+#saisie textarea::placeholder {
+    color: #94a3b8 !important;
+
+    opacity: 1 !important;
+}
+
+
+#saisie textarea:focus {
+    border-color: #6366f1 !important;
+
+    outline: none !important;
+
+    box-shadow:
+        0 0 0 3px rgba(99, 102, 241, 0.14),
+        0 6px 20px rgba(79, 70, 229, 0.10) !important;
+}
+
+
+#saisie button {
+    height: 100%;
+
+    min-height: 64px;
+
+    font-family: Arial, Helvetica, sans-serif !important;
+
+    font-size: 14px !important;
+
+    font-weight: 600 !important;
+
+    border-radius: 12px !important;
+}
+
+
+/* =========================================================
+   CHATBOT
+   ========================================================= */
+
+#chatbot {
+    font-family: Arial, Helvetica, sans-serif !important;
+
+    font-size: 14px !important;
+
+    background: linear-gradient(
+        160deg,
+        #eef2ff 0%,
+        #e0f2fe 100%
+    ) !important;
+
+    border: 1px solid #c7d2fe !important;
+
+    border-radius: 16px !important;
+}
+
+
+#chatbot .message,
+#chatbot .message * {
+    font-family: Arial, Helvetica, sans-serif !important;
+
+    font-size: 14px !important;
+
+    line-height: 1.45 !important;
+}
+
+
+#chatbot .message.bot p,
+#chatbot .message.bot li,
+#chatbot .message.bot ul,
+#chatbot .message.bot ol {
+    font-family: Arial, Helvetica, sans-serif !important;
+
+    font-size: 14px !important;
+
+    line-height: 1.5 !important;
+}
+
+
+#chatbot .bubble-wrap,
+#chatbot .wrapper {
+    background: transparent !important;
+}
+
+
+#chatbot .message.user {
+    background: #4f46e5 !important;
+
+    color: #ffffff !important;
+
+    border: none !important;
+}
+
+
+#chatbot .message.user * {
+    color: #ffffff !important;
+}
+
+
+#chatbot .message.bot {
+    background: #ffffff !important;
+
+    color: #1e1b4b !important;
+
+    border: 1px solid #c7d2fe !important;
+}
+
+
+/* =========================================================
+   TABLEAU DE RÉSULTATS
+   ========================================================= */
+
+#table,
+#table * {
+    font-family: Arial, Helvetica, sans-serif !important;
+}
+
+
+#table th,
+#table thead {
+    background: #4f46e5 !important;
+
+    color: #ffffff !important;
+
+    font-size: 13px !important;
+
+    font-weight: 700 !important;
+}
+
+
+#table th span,
+#table th button {
+    color: #ffffff !important;
+
+    font-family: Arial, Helvetica, sans-serif !important;
+}
+
+
+#table td {
+    font-family: Arial, Helvetica, sans-serif !important;
+
+    font-size: 13px !important;
+
+    font-variant-numeric: tabular-nums;
+}
+
+
+/* =========================================================
+   SIDEBAR — ASSISTANT / EXEMPLES / HISTORIQUE
+   ========================================================= */
+
+/* Décaler toute la sidebar sous le header fixe */
+aside {
+    padding-top: 92px !important;
+    box-sizing: border-box !important;
+}
+
+
+/* Titre "💡 Assistant" */
+aside h3 {
+    margin-top: 18px !important;
+    margin-bottom: 14px !important;
+}
+
+
+/* Tous les Dataset de la sidebar */
+aside .gradio-dataset {
+    margin-top: 10px !important;
+    margin-bottom: 18px !important;
+}
+
+
+/* Libellés des Dataset :
+   "Exemples de questions"
+   "Pour aller plus loin"
+   "Historique récent"
+*/
+aside .gradio-dataset label {
+    margin-top: 8px !important;
+    margin-bottom: 8px !important;
+
+    font-weight: 600 !important;
+}
+
+
+/* Éléments internes du Dataset */
+aside .gradio-dataset .wrap {
+    margin-top: 0 !important;
+}
+
+
+
+
+/* =========================================================
+   SIDEBAR ASSISTANT
+   ========================================================= */
+
+#assistant-sidebar {
+    padding-top: 105px !important;
+    box-sizing: border-box !important;
+}
+
+#assistant-sidebar h3 {
+    margin-top: 0 !important;
+}
+
+#assistant-sidebar .gradio-dataset {
+    margin-top: 12px !important;
+    margin-bottom: 18px !important;
+}
+
+
+
+/* =========================================================
+   CONTENU SIDEBAR — SOUS LE HEADER
+   ========================================================= */
+
+#assistant-sidebar-content {
+    padding-top: 105px !important;
+    box-sizing: border-box !important;
+}
+
+
+/* Titre Assistant */
+#assistant-sidebar-content h3 {
+    margin-top: 0 !important;
+    margin-bottom: 18px !important;
+}
+
+
+/* Exemples / Suggestions / Historique */
+#assistant-sidebar-content .gradio-dataset {
+    margin-top: 12px !important;
+    margin-bottom: 18px !important;
+}
+
+
+/* ============================================================
+   Glossaire dynamique
+   ============================================================ */
+
+#dynamic-glossary-container {
+    background: #f3f4f6;
+    border-radius: 10px;
+    padding: 10px 12px;
+    margin-top: 4px;
+    border: 1px solid #e5e7eb;
+}
+
+#glossary-title {
+    margin-bottom: 4px;
+}
+
+.dynamic-glossary {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.glossary-item {
+    padding-bottom: 8px;
+    border-bottom: 1px solid #e1e3e6;
+}
+
+.glossary-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.glossary-term {
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 2px;
+}
+
+.glossary-definition {
+    font-size: 11px;
+    line-height: 1.4;
+    color: #5f6368;
+}
+
+.dynamic-glossary-empty {
+    font-size: 11px;
+    line-height: 1.4;
+    color: #777;
+    font-style: italic;
+}
+
+
+.chat-loading {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.loading-hourglass {
+    display: inline-block;
+    font-size: 18px;
+    animation: hourglass-spin 1.2s linear infinite;
+}
+
+@keyframes hourglass-spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+/* ===== Variation vs N-1 dans les KPI ===== */
+.metric-card .delta { font-weight: 700; }
+.metric-card:not(.alt) .delta.up   { color: #86efac !important; }
+.metric-card:not(.alt) .delta.down { color: #fecaca !important; }
+.metric-card.alt .delta.up         { color: #15803d !important; }
+.metric-card.alt .delta.down       { color: #b91c1c !important; }
+.metric-card .delta.flat           { opacity: .8; }
+.metric-card .delta-label          { opacity: .85; }
+
+/* ===== Filtres globaux ===== */
+/* #filtres {
+    background: #f8fafc;
+    border: 1px solid #e0e7ff;
+    border-radius: 12px;
+    padding: 6px 12px !important;
+    margin: 4px 0 10px 0 !important;
+    gap: 12px !important;
+} */
+
+
+/* ===== Filtres dans le menu latéral ===== */
+#filtres {
+    background: #f8fafc;
+    border: 1px solid #e0e7ff;
+    border-radius: 10px;
+    padding: 6px 8px !important;
+    gap: 6px !important;
+}
+#filtres label > span:first-child { font-size: .72rem !important; }
+#filtres input { height: 30px !important; font-size: .85rem !important; }
+#filtres-title { margin: 0 0 4px 0 !important; }
+
+/* Champ qui reçoit le clic sur la carte */
+#map-click { display: none !important; }
+
+/* Requête SQL compacte */
+#sql-box { max-height: 180px; overflow: auto; }
+
+
+
+
+
+
+/* ===== Alertes ===== */
+#alerts { margin: 0 0 8px 0 !important; padding: 0 !important; }
+.alert-banner {
+    background: #fff7ed;
+    border: 1px solid #fdba74;
+    border-left: 5px solid #f97316;
+    border-radius: 10px;
+    padding: 8px 14px;
+    color: #9a3412;
+}
+.alert-banner .alert-title { font-weight: 700; margin-bottom: 2px; }
+.alert-banner ul { margin: 0; padding-left: 18px; }
+
+/* ===== Bande « À retenir » ===== */
+#highlights { margin: 0 0 6px 0 !important; padding: 0 !important; }
+.hl-band { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 4px 0 8px; }
+.hl-label {
+    font-size: .72rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: .06em; color: #4f46e5;
+}
+.hl-chip {
+    display: flex; flex-direction: column;
+    padding: 6px 12px; border-radius: 10px;
+    border: 1px solid #c7d2fe; background: #eef2ff;
+}
+.hl-chip .hl-title { font-size: .7rem; font-weight: 700; }
+.hl-chip .hl-text  { font-size: .85rem; }
+.hl-chip.up   { background: #dcfce7; border-color: #86efac; color: #166534; }
+.hl-chip.down { background: #fee2e2; border-color: #fca5a5; color: #991b1b; }
+.hl-chip.warn { background: #ffedd5; border-color: #fdba74; color: #9a3412; }
+
+/* ===== Pastilles de questions de suite ===== */
+#chips { gap: 6px !important; margin-top: 6px !important; flex-wrap: wrap !important; }
+#chips .chip {
+    background: #eef2ff !important;
+    border: 1px solid #c7d2fe !important;
+    color: #3730a3 !important;
+    border-radius: 999px !important;
+    font-size: .8rem !important;
+    padding: 4px 12px !important;
+    min-width: 0 !important;
+    height: auto !important;
+    white-space: normal !important;
+    text-align: left !important;
+}
+#chips .chip:hover { background: #e0e7ff !important; }
+
+/* ===== Phrase en langage clair ===== */
+#plain-sql {
+    margin-top: 10px !important;
+    font-size: .9rem;
+    color: #3730a3;
+    background: #eef2ff;
+    border-radius: 8px;
+    padding: 6px 12px !important;
+}
+
+/* ===== En-tête réduit : logo + titre à gauche, pastilles à droite ===== */
+.gradio-container { padding-top: 72px !important; }
+
+#entete {
+    height: 64px !important;
+    min-height: 64px !important;
+    max-height: 64px !important;
+}
+
+#entete-gauche { height: 64px !important; }
+
+#kpi {
+    height: 64px !important;
+    justify-content: center !important;
+    align-items: flex-end !important;
+}
+
+#kpi .kpi-status-row { flex-wrap: nowrap !important; justify-content: flex-end !important; }
+#kpi .kpi-section { align-items: flex-end !important; }
+
+/*===================
+/* ===== Filtres compacts ===== */
+#filtres {
+    padding: 2px 10px !important;
+    margin: 2px 0 6px 0 !important;
+    gap: 8px !important;
+    min-height: 0 !important;
+}
+#filtres .block { padding: 0 !important; min-height: 0 !important; }
+#filtres label > span:first-child {
+    font-size: .68rem !important;
+    padding: 1px 6px !important;
+    margin-bottom: 2px !important;
+}
+#filtres input {
+    height: 28px !important;
+    min-height: 28px !important;
+    font-size: .82rem !important;
+    padding: 2px 8px !important;
+}
+
+/* Champ qui reçoit le clic sur la carte */
+#map-click { display: none !important; }
+
+
+
+/* =========================================================
+   PAGE — À PROPOS DE L'ASSISTANT
+   ========================================================= */
+
+#about-page {
+    max-width: 1250px;
+    margin: 0 auto;
+    padding: 10px 10px 40px;
+    color: #1e1b4b;
+}
+
+.about-hero {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 24px 28px;
+    margin-bottom: 18px;
+    background: linear-gradient(135deg, #eef2ff, #e0f2fe);
+    border: 1px solid #c7d2fe;
+    border-radius: 18px;
+}
+
+.about-hero-icon {
+    width: 58px;
+    height: 58px;
+    flex: 0 0 58px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+    border: 1px solid #c7d2fe;
+    border-radius: 15px;
+    font-size: 28px;
+}
+
+.about-hero h1 {
+    margin: 0 0 5px;
+    font-size: 1.7rem;
+}
+
+.about-hero p {
+    margin: 0;
+    color: #5b5f72;
+    font-size: .95rem;
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-bottom: 14px;
+}
+
+.about-card,
+.about-section {
+    background: #ffffff;
+    border: 1px solid #e0e7ff;
+    border-radius: 16px;
+    box-shadow: 0 2px 8px rgba(79, 70, 229, .06);
+}
+
+.about-card {
+    padding: 20px;
+}
+
+.about-card-icon {
+    font-size: 25px;
+    margin-bottom: 8px;
+}
+
+.about-card h2,
+.about-section h2 {
+    margin: 0 0 8px;
+    font-size: 1.05rem;
+}
+
+.about-card p {
+    margin: 7px 0;
+    line-height: 1.55;
+    font-size: .88rem;
+    color: #4b5563;
+}
+
+.about-card ul,
+.about-limits ul {
+    margin: 10px 0 0;
+    padding-left: 19px;
+    color: #4b5563;
+    font-size: .86rem;
+    line-height: 1.65;
+}
+
+.about-flow-mini {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    margin-top: 15px;
+    padding: 10px;
+    background: #f8fafc;
+    border-radius: 10px;
+    color: #3730a3;
+    font-size: .78rem;
+    font-weight: 600;
+}
+
+.about-section {
+    padding: 22px;
+    margin-bottom: 14px;
+}
+
+.about-section-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.about-section-title > span {
+    font-size: 25px;
+}
+
+.about-section-title h2 {
+    margin-bottom: 2px;
+}
+
+.about-section-title p {
+    margin: 0;
+    color: #6b7280;
+    font-size: .82rem;
+}
+
+.about-process {
+    display: flex;
+    align-items: stretch;
+    gap: 8px;
+}
+
+.about-step {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 14px;
+    background: #f8fafc;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+}
+
+.about-step-number {
+    width: 27px;
+    height: 27px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 9px;
+    background: #4f46e5;
+    color: white;
+    border-radius: 50%;
+    font-size: .75rem;
+    font-weight: 700;
+}
+
+.about-step strong {
+    font-size: .85rem;
+    margin-bottom: 5px;
+}
+
+.about-step span {
+    color: #6b7280;
+    font-size: .75rem;
+    line-height: 1.4;
+}
+
+.about-arrow {
+    display: flex;
+    align-items: center;
+    color: #a5b4fc;
+    font-size: 20px;
+}
+
+.about-two-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+}
+
+.about-value-list {
+    display: grid;
+    gap: 9px;
+}
+
+.about-value-list > div {
+    display: flex;
+    flex-direction: column;
+    padding: 11px 13px;
+    background: #f8fafc;
+    border-radius: 10px;
+}
+
+.about-value-list b {
+    font-size: .82rem;
+    margin-bottom: 3px;
+}
+
+.about-value-list span {
+    color: #6b7280;
+    font-size: .77rem;
+    line-height: 1.4;
+}
+
+.about-warning {
+    padding: 12px 15px;
+    margin-bottom: 12px;
+    background: #fff7ed;
+    border: 1px solid #fdba74;
+    border-left: 4px solid #f97316;
+    border-radius: 10px;
+    color: #9a3412;
+    font-size: .83rem;
+}
+
+.about-warning p {
+    margin: 4px 0 0;
+}
+
+.about-transparency-flow {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 15px;
+    background: #f8fafc;
+    border-radius: 12px;
+    overflow-x: auto;
+}
+
+.about-transparency-flow > div {
+    min-width: 125px;
+    padding: 11px;
+    background: #ffffff;
+    border: 1px solid #e0e7ff;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.about-transparency-flow span {
+    display: block;
+    font-weight: 700;
+    font-size: .78rem;
+    color: #3730a3;
+}
+
+.about-transparency-flow small {
+    display: block;
+    margin-top: 4px;
+    color: #6b7280;
+    font-size: .68rem;
+}
+
+.about-transparency-flow b {
+    color: #a5b4fc;
+}
+
+.about-footer-note {
+    margin: 15px 0 0;
+    padding-top: 13px;
+    border-top: 1px solid #e5e7eb;
+    color: #6b7280;
+    font-size: .8rem;
+    line-height: 1.5;
+}
+
+@media (max-width: 900px) {
+    .about-grid,
+    .about-two-columns {
+        grid-template-columns: 1fr;
+    }
+
+    .about-process {
+        flex-direction: column;
+    }
+
+    .about-arrow {
+        justify-content: center;
+        transform: rotate(90deg);
+    }
+}
+
+
+#about-button {
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: 220px !important;
+    flex: 0 0 auto !important;
+}
+
+#about-button button {
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: 220px !important;
+
+    padding: 5px 9px !important;
+    font-size: 11px !important;
+    line-height: 1.15 !important;
+
+    white-space: nowrap !important;
+}
+
+#about-topbar {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: flex-end !important;
+    align-items: center !important;
+    margin: 0 0 10px 0 !important;
+    padding: 0 !important;
+}
+
+#about-topbar > :first-child {
+    flex: 1 !important;
+}
+
+#about-back-button {
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    flex: 0 0 auto !important;
+}
+
+#about-back-button button {
+    width: auto !important;
+    min-width: 0 !important;
+    padding: 6px 12px !important;
+    font-size: 12px !important;
+    white-space: nowrap !important;
+}
+
+.about-back-button:hover {
+    background: #eef2ff !important;
+}
+
+
+/* =========================================================
+   BOUTON RETOUR — PAGE À PROPOS
+   ========================================================= */
+
+#about-page-container {
+    width: 100% !important;
+    position: relative !important;
+    box-sizing: border-box !important;
+    padding: 15px 25px 40px !important;
+}
+
+#header-actions {
+    justify-content: flex-end !important;
+    align-items: center !important;
+}
+
+#about-back-button {
+    position: absolute !important;
+    top: 15px !important;
+    right: 25px !important;
+
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: none !important;
+
+    padding: 6px 12px !important;
+    margin: 0 !important;
+
+    z-index: 1000 !important;
+}
+
+#about-back-button button {
+    width: auto !important;
+    min-width: 0 !important;
+    padding: 6px 12px !important;
+    font-size: 12px !important;
+    white-space: nowrap !important;
+}
+
+#about-content {
+    padding-top: 45px !important;
+}
+
+#about-back-button button {
+    width: auto !important;
+    min-width: 0 !important;
+    padding: 7px 13px !important;
+    font-size: 12px !important;
+}
+
+#about-content {
+    padding-top: 45px !important;
+}
+
+/* =========================================================
+   FIN
+   ========================================================= */
+
+/* """ */
+

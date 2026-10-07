@@ -11,6 +11,11 @@ ré-ajustements statistiques.
 """
 from __future__ import annotations
 
+from .forecasting_xgboost import (
+    XGBOOST_AVAILABLE,
+    forecast_xgboost,
+)
+
 import logging
 import warnings
 from dataclasses import dataclass, field
@@ -204,16 +209,57 @@ class ForecastingModel:
 
     def _candidates(self, series: pd.Series) -> list[_Candidate]:
         candidates = [
-            _Candidate(BASELINE_KEY, BASELINE_LABEL, _fc_seasonal_naive),
-            _Candidate("linear", "Tendance linéaire", _fc_linear),
-            _Candidate("holt_damped", "Lissage exponentiel (tendance amortie)", _fc_holt_damped),
-            _Candidate("linear_seasonal", "Tendance linéaire + saisonnalité", _fc_linear_seasonal, seasonal=True),
-            _Candidate("hw_add", "Holt-Winters (saisonnalité additive)", lambda t, h: _fc_holt_winters(t, h, "add"), seasonal=True),
+            _Candidate(
+                key="seasonal_naive",
+                label="Même mois l'an dernier",
+                fn=_fc_seasonal_naive,
+                seasonal=True,
+            ),
+            _Candidate(
+                key="linear",
+                label="Régression linéaire",
+                fn=_fc_linear,
+            ),
+            _Candidate(
+                key="holt_damped",
+                label="Holt amorti",
+                fn=_fc_holt_damped,
+            ),
+            _Candidate(
+                key="linear_seasonal",
+                label="Régression linéaire saisonnière",
+                fn=_fc_linear_seasonal,
+                seasonal=True,
+            ),
+            _Candidate(
+                key="holt_winters",
+                label="Holt-Winters",
+                fn=lambda train, h: _fc_holt_winters(
+                    train,
+                    h,
+                    seasonal="add",
+                ),
+                seasonal=True,
+            ),
         ]
-        if (series > 0).all():
+
+        # --------------------------------------------------------------
+        # XGBOOST
+        # --------------------------------------------------------------
+        #
+        # XGBoost utilise notamment lag_12.
+        # On évite donc de l'activer sur des séries trop courtes.
+        #
+        if XGBOOST_AVAILABLE and len(series) >= 18:
             candidates.append(
-                _Candidate("hw_mul", "Holt-Winters (saisonnalité multiplicative)", lambda t, h: _fc_holt_winters(t, h, "mul"), seasonal=True)
+                _Candidate(
+                    key="xgboost",
+                    label="XGBoost",
+                    fn=forecast_xgboost,
+                    seasonal=False,
+                )
             )
+
         return candidates
 
     @staticmethod
@@ -226,58 +272,152 @@ class ForecastingModel:
 
     def _select_model(self, series: pd.Series, horizon: int) -> dict:
         n = len(series)
-        test_size = min(horizon, self.MAX_BACKTEST_HORIZON, max(1, n // 4))
+        test_size = min(
+            horizon,
+            self.MAX_BACKTEST_HORIZON,
+            max(1, n // 4),
+        )
+
         all_candidates = self._candidates(series)
 
         seasonal_origins = self._origins(
-            n, test_size, self.MIN_SEASONAL_TRAIN, self.MAX_FOLDS
+            n,
+            test_size,
+            self.MIN_SEASONAL_TRAIN,
+            self.MAX_FOLDS,
         )
+
         if len(seasonal_origins) >= 2:
             origins = seasonal_origins
             candidates = all_candidates
         else:
             origins = self._origins(
-                n, test_size, self.MIN_HISTORY_POINTS, self.MAX_FOLDS
+                n,
+                test_size,
+                self.MIN_HISTORY_POINTS,
+                self.MAX_FOLDS,
             )
-            candidates = [c for c in all_candidates if not c.seasonal]
+
+            candidates = [
+                c for c in all_candidates
+                if not c.seasonal
+            ]
 
         if not origins:
-            return self._unvalidated_selection(all_candidates, test_size)
+            return self._unvalidated_selection(
+                all_candidates,
+                test_size,
+            )
 
-        outcomes: dict[str, tuple[np.ndarray, np.ndarray]] = {}
+        outcomes: dict[
+            str,
+            tuple[np.ndarray, np.ndarray]
+        ] = {}
+
         for candidate in candidates:
             actual_rows: list[np.ndarray] = []
             pred_rows: list[np.ndarray] = []
             failed = False
+
             for origin in origins:
                 train = series.iloc[:origin]
-                test = series.iloc[origin: origin + test_size]
+                test = series.iloc[
+                    origin: origin + test_size
+                ]
+
                 try:
-                    pred = self._predict(candidate, train, test_size)
+                    pred = self._predict(
+                        candidate,
+                        train,
+                        test_size,
+                    )
+
                 except Exception:
-                    logger.warning("Modèle %s ignoré (échec au backtest).", candidate.key, exc_info=True)
+                    logger.warning(
+                        "Modèle %s ignoré "
+                        "(échec au backtest).",
+                        candidate.key,
+                        exc_info=True,
+                    )
                     failed = True
                     break
-                actual_rows.append(test.to_numpy(dtype=float))
+
+                actual_rows.append(
+                    test.to_numpy(dtype=float)
+                )
                 pred_rows.append(pred)
+
             if not failed:
-                outcomes[candidate.key] = (np.array(actual_rows), np.array(pred_rows))
+                outcomes[candidate.key] = (
+                    np.array(actual_rows),
+                    np.array(pred_rows),
+                )
 
         if not outcomes:
-            return self._unvalidated_selection(all_candidates, test_size)
+            return self._unvalidated_selection(
+                all_candidates,
+                test_size,
+            )
 
-        labels = {c.key: c for c in candidates}
-        scored = {key: self._metrics(actual, pred) for key, (actual, pred) in outcomes.items()}
+        labels = {
+            c.key: c
+            for c in candidates
+        }
+
+        scored = {
+            key: self._metrics(actual, pred)
+            for key, (actual, pred)
+            in outcomes.items()
+        }
+
         ranking = [
-            {"key": key, "model": labels[key].label, **metrics}
-            for key, metrics in sorted(scored.items(), key=lambda item: item[1]["MAE"])
+            {
+                "key": key,
+                "model": labels[key].label,
+                **metrics,
+            }
+            for key, metrics in sorted(
+                scored.items(),
+                key=lambda item: item[1]["MAE"],
+            )
         ]
+
+#..........................
+
+        logger.info(
+            "🏆 Classement des modèles de forecasting : %s",
+            [
+                {
+                    "model": row["model"],
+                    "MAE": round(row["MAE"], 2),
+                    "RMSE": round(row["RMSE"], 2),
+                    "MAPE": round(row["MAPE"], 4),
+                }
+                for row in ranking
+            ],
+        )        
+
+#...................
+
         best_key = ranking[0]["key"]
         chosen = labels[best_key]
+
         actual, pred = outcomes[best_key]
         errors = actual - pred
-        step_sigma = np.maximum.accumulate(np.sqrt(np.mean(errors ** 2, axis=0)))
+
+        step_sigma = np.maximum.accumulate(
+            np.sqrt(np.mean(errors ** 2, axis=0))
+        )
+
         baseline_metrics = scored.get(BASELINE_KEY, {})
+
+        logger.info(
+            "🏆 Modèle sélectionné : %s | MAE=%.2f | RMSE=%.2f | MAPE=%.4f",
+            chosen.label,
+            scored[best_key]["MAE"],
+            scored[best_key]["RMSE"],
+            scored[best_key]["MAPE"],
+        )
 
         return {
             "chosen": chosen,
@@ -287,8 +427,17 @@ class ForecastingModel:
             "step_sigma": step_sigma,
             "n_folds": len(origins),
             "test_size": test_size,
-            "reason": self._explain(chosen, scored[best_key], baseline_metrics, len(origins), test_size),
+            "reason": self._explain(
+                chosen,
+                scored[best_key],
+                baseline_metrics,
+                len(origins),
+                test_size,
+            ),
         }
+
+
+    
 
     @staticmethod
     def _unvalidated_selection(candidates: list[_Candidate], test_size: int) -> dict:

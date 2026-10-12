@@ -28,4 +28,4 @@ WORKDIR /app
 
 EXPOSE 7860
 
-CMD ["python", "-m", "app.App_IA_Assistant_Gradio"]
+CMD ["python", "-m", "app.server"]

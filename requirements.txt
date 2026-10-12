@@ -16,4 +16,6 @@ gradio
 plotly
 openpyxl
 python-pptx
-
+authlib
+itsdangerous
+httpx

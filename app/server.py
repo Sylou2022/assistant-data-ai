@@ -45,19 +45,26 @@ app.add_middleware(SessionMiddleware, secret_key=SESSION_SECRET, https_only=True
 
 
 # ---------------- Notification ----------------
+
+NTFY_TOKEN = os.environ.get("tk_7is0n0tiyhxrifum61w0vrh61la02", "")
+
 def notify(title: str, message: str) -> None:
-    """Push sur votre téléphone via ntfy.sh (app gratuite ntfy). Non bloquant."""
     if not NTFY_TOPIC:
+        logger.warning("NTFY_TOPIC vide : aucune notification envoyée.")
         return
 
     def _send():
+        headers = {"Title": title.encode("utf-8"), "Tags": "bell"}
+        if NTFY_TOKEN:
+            headers["Authorization"] = f"Bearer {NTFY_TOKEN}"
         try:
-            httpx.post(
+            r = httpx.post(
                 f"https://ntfy.sh/{NTFY_TOPIC}",
                 content=message.encode("utf-8"),
-                headers={"Title": title.encode("utf-8"), "Tags": "bell"},
-                timeout=5,
+                headers=headers,
+                timeout=10,
             )
+            logger.warning("ntfy : HTTP %s", r.status_code)
         except Exception:
             logger.exception("Notification impossible")
 

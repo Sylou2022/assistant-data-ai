@@ -637,9 +637,14 @@ class DataAgent:
         messages.append({"role": "user", "content": question})
 
         state: dict[str, Any] = {
-            "queries": [], "display": None, "forecast_result": None,
-            "anomalies": [], "warnings": [], "main_sql": None, "alert_created": False,
-            # l'année d'un filtre actif compte pour le titre du graphique
+            "queries": [],
+            "display": None,
+            "forecast_result": None,
+            "anomalies": [],
+            "warnings": [],
+            "main_sql": None,
+            "alert_created": False,
+            "regions_df": None,
             "question": f"{question} {(filters or {}).get('Année', '')}".strip(),
         }
         text = ""

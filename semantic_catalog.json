@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-30T20:15:21.022387+00:00",
+  "generated_at": "2026-10-07T11:29:00.213638+00:00",
   "tables": [
     {
       "schema": "dbo",
@@ -876,6 +876,26 @@
     },
     {
       "schema": "dbo",
+      "name": "Fact_Ventes_backup_dates",
+      "columns": [
+        {
+          "name": "Vente_ID",
+          "data_type": "int",
+          "nullable": false,
+          "position": 1,
+          "is_primary_key": false
+        },
+        {
+          "name": "Date_ID",
+          "data_type": "int",
+          "nullable": false,
+          "position": 2,
+          "is_primary_key": false
+        }
+      ]
+    },
+    {
+      "schema": "dbo",
       "name": "Semantic_Entities",
       "columns": [
         {
@@ -1065,6 +1085,14 @@
       "target_schema": "dbo",
       "target_table": "Dim_Region",
       "target_column": "Region_ID"
+    },
+    {
+      "source_schema": "dbo",
+      "source_table": "Semantic_Synonyms",
+      "source_column": "Entity_ID",
+      "target_schema": "dbo",
+      "target_table": "Semantic_Entities",
+      "target_column": "Entity_ID"
     },
     {
       "source_schema": "dbo",
@@ -1753,6 +1781,13 @@
         "Rule_Type": "JOINS",
         "Rule_Value": "Utiliser Semantic_Relationships.",
         "Description": "Éviter les jointures inventées par le modèle."
+      },
+      {
+        "Rule_ID": 12,
+        "Rule_Name": "Limite de résultats",
+        "Rule_Type": "PERFORMANCE",
+        "Rule_Value": "Utiliser TOP (1000) pour les requêtes détaillées.",
+        "Description": "Évite de retourner un volume excessif de données."
       }
     ],
     "examples": [

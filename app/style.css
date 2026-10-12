@@ -1472,6 +1472,11 @@ aside .gradio-dataset .wrap {
     padding-top: 45px !important;
 }
 
+#logout-link:hover {
+    background: #b91c1c !important;
+    border-color: #b91c1c !important;
+}
+
 /* =========================================================
    FIN
    ========================================================= */

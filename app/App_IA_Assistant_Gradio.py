@@ -2723,6 +2723,14 @@ def build_app() -> gr.Blocks:
                     scale=0,
                     min_width=0,
                 )
+                gr.HTML(
+                    '<a href="/logout" target="_self" id="logout-link" '
+                    'style="display:inline-block;padding:6px 14px;border:1px solid #dc2626;'
+                    'border-radius:8px;background:#dc2626;color:#ffffff;font-size:.85rem;'
+                    'font-weight:600;text-decoration:none;white-space:nowrap;">'
+                    "⎋ Se déconnecter</a>",
+                    elem_id="logout-container",
+                )
 
         # ---------------- Page « À propos » ----------------
 # ---------------- Page « À propos » ----------------
